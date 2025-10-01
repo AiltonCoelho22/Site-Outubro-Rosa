@@ -1,2 +1,1 @@
-# Site---Outubro-Rosa
-🌌 SEM NOME
+# 🌌 SEM NOME
