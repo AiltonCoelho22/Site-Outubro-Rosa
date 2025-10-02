@@ -1,14 +1,23 @@
-# 🌌 SEM NOME
+# Outrobro Rosa-🌌 
 
 
-# Site em desovovimento - 😱
+# Site em Desevolvimento - 😱
 
 
 
-# Tarefas - Coloque o seu nome do lado
-# () Base do Site HTML Conteudo! :
-# () Base do Site CSS Estilo!   : Ailton - base 
-# () melhoria Visual    :
+#      -- Tarefas - Coloque o seu nome do lado -- 
+#
+#  -- DEVS | Rayanne Camili,Bruno Gllalker,Ailton Coelho --
+#  
+#        -- Frot-end --
+#
+#      * Tarefas *
+#
+# (-) Conteudo HTML: 
+# 
+# (X) Style CSS  : Ailton Coelho
+#
+# (-) 
 #
 #
 #
