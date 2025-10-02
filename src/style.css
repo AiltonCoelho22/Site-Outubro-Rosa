@@ -1,5 +1,29 @@
 @charset "UTF-8";
 
 :root {
+    /* Paleta de Cores */
+    --Cor-pricipal: white;
     
+    /* Fonts */
+    --font-pricicipal: arial: 
+}
+
+body {
+    background-color: white;
+}
+
+.logo {
+    width: 64px;
+}
+
+header {
+    text-align: left;
+}
+
+main {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
 }
