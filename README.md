@@ -16,8 +16,9 @@ Desenvolver um site educativo e informativo sobre prevenção e diagnóstico pre
 
 ## 🌐 Acesse o Site
 
-[🔗 **Clique aqui para acessar o site**](index.html)
+[🔗 **Clique aqui para acessar o site**](src/index.html)
 
 ---
 
 *💕 Juntos na luta pela conscientização do câncer de mama*
+
