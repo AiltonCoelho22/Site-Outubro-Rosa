@@ -1,55 +1,621 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site rosa</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Outubro Rosa — Juntos pela prevenção</title>
+  <meta name="description"
+    content="Campanha Outubro Rosa — informação, prevenção e apoio para pacientes e familiares." />
 
+  <!-- Fonte Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-    
-    <!---->
-    <header>
-       <div class="logo" >
-        <img src="assets/css.svg" alt="logo-flet">
-       </div>
-        
-       
-       <nav>
-       
-        <a href="#incio" target="_self">Inicio</a>
-        <a href="#sobre" target="_self">Sobre</a>
-        <a href="#sobre" target="_self">Sobre</a>
-        <a href="#sobre" target="_self">Sobre</a>
-        <a href="#Contato" target="_self">Contato</a>
-        
-        </nav>
-       
-    </header>
-    
-    <!----> 
-    <main>
-        <h1>Outubro Rosa – Prevenção é um ato de amor</h1>
-        <h2>Faça o autoexame e cuide de quem você ama.</h2>
-        <h3>oi³</h3>
 
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>Outubro Rosa</h1>
+        <small>Informar • Prevenir • Apoiar</small>
+      </div>
+      <nav class="main-nav" role="navigation" aria-label="Menu principal">
+        <a href="#sobre" role="link">Sobre</a>
+        <a href="#prevencao" role="link">Prevenção</a>
+        <a href="#autoexame" role="link">Autoexame</a>
+        <a href="#recursos" role="link">Recursos</a>
+        <a href="#eventos" role="link">Eventos</a>
+        <a href="#ajudar" role="link">Como Ajudar</a>
+        <a href="#contato" role="link">Contato</a>
+        <button class="cta-donate" id="openDonate">Doar</button>
+        <button class="theme-toggle" id="themeToggle" aria-pressed="false">🌙</button>
+      </nav>
+    </div>
+  </header>
 
-        <picture>
-            <img src="" alt="">
-        </picture>
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div class="hero-card">
+        <span class="kicker">OUTUBRO ROSA</span>
+        <h2 class="hero-title">Juntos na luta contra o câncer de mama</h2>
+        <p class="hero-sub">Campanha de conscientização, exames de prevenção e apoio. Doe, participe e compartilhe!</p>
+        <p class="campaign-line" aria-live="polite">Linha de Informação: <strong>0800-123-OUT</strong> — Orientações e agendamento</p>
+        <div class="rotating-phrases" aria-hidden="false">
+          <div class="phrase active">Prevenção salva vidas — agende sua mamografia</div>
+          <div class="phrase">Não espere: quanto antes, melhor o tratamento</div>
+          <div class="phrase">Apoio emocional faz parte do cuidado</div>
+          <div class="phrase">Doe e fortaleça a rede de atendimento local</div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="ctaDoar">Doar agora</button>
+          <a href="#sobre" class="btn btn-outline">Saiba mais</a>
+        </div>
+      </div>
+      <!-- pink side glow containers for visual emphasis (purely decorative) -->
+      <aside class="side-glows" aria-hidden="true">
+        <div class="glow glow-left"></div>
+        <div class="glow glow-right"></div>
+      </aside>
+      <!-- hero visual removed (no image as requested) -->
+    </div>
+  </section>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia illo nisi tenetur iusto et. Minima ipsum consectetur deserunt cupiditate! Possimus mollitia tenetur rem reiciendis praesentium, voluptatem est nam. Provident, illo!</p>
-    </main>
-    
-    <!---->
-    <footer>
-        <p>&copy; nossa quipe </p>
-        <li><a href="#sobre" target="_blank">Sobre</a></li>
-        <li><a href="#sobre" target="_blank">Sobre</a></li>
-        <li><a href="#sobre" target="_blank">Sobre</a></li>
+  <!-- LINHA DO TEMPO DA CAMPANHA -->
+  <section id="linha-tempo" class="container">
+    <h2 class="section-title">Linha do tempo da campanha</h2>
+    <div class="timeline" aria-label="Linha do tempo da campanha Outubro Rosa">
+      <div class="timeline-item">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="time">1990s</div>
+        <div class="tl-content">
+          <h4>Início da conscientização</h4>
+          <p>Primeiras ações locais pelo reconhecimento da importância do diagnóstico precoce.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="time">2000s</div>
+        <div class="tl-content">
+          <h4>Ampliação de exames</h4>
+          <p>Maior acesso a mamografias e programas públicos de rastreamento.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="time">2010s</div>
+        <div class="tl-content">
+          <h4>Campanhas nacionais</h4>
+          <p>Unificação de mensagens e forte presença nas mídias comunitárias.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="time">2020+</div>
+        <div class="tl-content">
+          <h4>Ações locais e suporte</h4>
+          <p>Foco em suporte emocional, reabilitação e inclusão de pacientes na tomada de decisão.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    </footer>
+  <!-- SOBRE -->
+  <section id="sobre" class="container">
+    <h2 class="section-title">Sobre a Campanha</h2>
+    <div class="about-wrap" role="region" aria-label="Sobre a campanha">
+      <div class="about-grid">
+        <article class="about-card">
+          <i class="bi bi-info-circle"></i>
+          <h3>Missão</h3>
+          <p>Conscientizar sobre o câncer de mama e facilitar o acesso a exames e apoio.</p>
+        </article>
+        <article class="about-card">
+          <i class="bi bi-people"></i>
+          <h3>Como atuamos</h3>
+          <p>Campanhas locais, rodas de conversa, orientação e suporte emocional para quem precisa.</p>
+        </article>
+        <article class="about-card">
+          <i class="bi bi-heart"></i>
+          <h3>Impacto</h3>
+          <p>Promovemos a detecção precoce e fortalecemos redes de cuidado em comunidades.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVENÇÃO -->
+  <section id="prevencao" class="container">
+    <h2 class="section-title">Prevenção e Cuidados</h2>
+    <div class="prevention-blocks">
+      <article class="prevention-card">
+        <h3>Exames Regulares</h3>
+        <ul>
+          <li>Mamografia anual após 40 anos</li>
+          <li>Ultrassom quando recomendado</li>
+          <li>Consultas periódicas</li>
+        </ul>
+      </article>
+
+      <article class="prevention-card">
+        <h3>Hábitos Saudáveis</h3>
+        <ul>
+          <li>Alimentação balanceada</li>
+          <li>Atividade física regular</li>
+          <li>Controle do peso</li>
+        </ul>
+      </article>
+
+      <article class="prevention-card">
+        <h3>Autocuidado</h3>
+        <ul>
+          <li>Autoexame mensal</li>
+          <li>Atenção aos sinais do corpo</li>
+          <li>Bem-estar emocional</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- AUTOEXAME -->
+  <section id="autoexame" class="container">
+    <h2 class="section-title">Autoexame</h2>
+    <p class="lead">Conhecer o próprio corpo é um passo importante na detecção precoce. Veja os passos básicos abaixo.</p>
+    <!-- Tabbed autoexame: 3 tabs, stacked on small screens -->
+    <div class="tabs" role="tablist" aria-label="Autoexame passos">
+      <button role="tab" aria-selected="true" aria-controls="step1" id="tab1" class="tab">Observação Visual</button>
+      <button role="tab" aria-selected="false" aria-controls="step2" id="tab2" class="tab">Palpação em pé</button>
+      <button role="tab" aria-selected="false" aria-controls="step3" id="tab3" class="tab">Palpação deitada</button>
+  <button role="tab" aria-selected="false" aria-controls="step4" id="tab4" class="tab">Sinais de Alerta</button>
+  <button role="tab" aria-selected="false" aria-controls="step5" id="tab5" class="tab">Prevenção e Exames</button>
+    </div>
+    <div class="tab-panels">
+      <div role="tabpanel" id="step1" aria-labelledby="tab1" class="tab-panel">Olhe-se no espelho com os braços ao lado do corpo, depois levantados. Procure alterações no contorno ou pele.</div>
+      <div role="tabpanel" id="step2" aria-labelledby="tab2" class="tab-panel" hidden>Use a ponta dos dedos e faça movimentos circulares cobrindo toda a mama e a axila.</div>
+      <div role="tabpanel" id="step3" aria-labelledby="tab3" class="tab-panel" hidden>Deite-se com um braço atrás da cabeça e repita a palpação para sentir alterações.</div>
+  <div role="tabpanel" id="step4" aria-labelledby="tab4" class="tab-panel" hidden>
+        <p>Fique atenta a sinais que merecem avaliação médica imediata:</p>
+        <ul class="alert-list">
+          <li>Nódulo firme ou espessamento na mama ou axila</li>
+          <li>Mudança no tamanho ou formato da mama</li>
+          <li>Alterações na pele (como casca de laranja) ou vermelhidão persistente</li>
+          <li>Secreção mamilar espontânea, especialmente sanguinolenta</li>
+          <li>Inversão recente do mamilo ou dor local persistente</li>
+        </ul>
+        <p class="small-muted">Se notar qualquer um desses sinais, procure um profissional de saúde para avaliação.</p>
+      </div>
+      <div role="tabpanel" id="step5" aria-labelledby="tab5" class="tab-panel" hidden>
+        <h4>Prevenção e agendamento</h4>
+        <p>Manter consultas regulares com seu médico e realizar exames conforme a faixa etária e risco:</p>
+        <ul class="prevention-list">
+          <li>Mamografia: geralmente a cada 1-2 anos a partir da idade indicada pelo seu médico.</li>
+          <li>Autoexame mensal como complemento à rotina — não substitui exames clínicos.</li>
+          <li>Converse com seu profissional sobre histórico familiar e possíveis exames adicionais.</li>
+        </ul>
+        <p class="small-muted">A prevenção combina informação, exames regulares e acesso a serviços de saúde.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACTO EMOCIONAL -->
+  <section id="impacto-emocional" class="container">
+  <h2 class="section-title">Impacto Emocional</h2>
+  <div class="support-cards">
+    <div class="support-card">
+      <i class="bi bi-heart-pulse-fill"></i>
+      <h3>Acolhimento</h3>
+      <p>O diagnóstico traz emoções complexas. Procure apoio psicológico e grupos de escuta.</p>
+    </div>
+
+    <div class="support-card">
+      <i class="bi bi-people-fill"></i>
+      <h3>Grupos de Apoio</h3>
+      <p>Compartilhar experiências ajuda no enfrentamento e reduz a sensação de isolamento.</p>
+    </div>
+
+    <div class="support-card">
+      <i class="bi bi-journal-medical"></i>
+      <h3>Acompanhamento</h3>
+      <p>Suporte multidisciplinar melhora a qualidade de vida: psicologia, nutrição e fisioterapia.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- RECURSOS -->
+<section id="recursos" class="container">
+  <h2 class="section-title">Recursos e Apoio</h2>
+  <p class="section-desc">Materiais, grupos e canais de atendimento para quem busca informação e suporte.</p>
+
+  <div class="grid-3" aria-hidden="false">
+    <article class="card" role="article" aria-label="Guia de Prevenção">
+      <h3>Guia de Prevenção (PDF)</h3>
+      <p>Baixe um resumo prático com orientações sobre exames, sinais de alerta e referências locais.</p>
+      <a class="btn btn-outline" href="./assets/guias/guia-prevencao.pdf" download>Baixar PDF</a>
+    </article>
+
+    <article class="card" role="article" aria-label="Grupos de Apoio">
+      <h3>Grupos de Apoio</h3>
+      <p>Encontre grupos presenciais e online que oferecem escuta, troca de experiências e suporte emocional.</p>
+      <a class="btn btn-outline" href="#contato" aria-controls="contato">Entrar em contato</a>
+    </article>
+
+    <article class="card" role="article" aria-label="Central de Atendimento">
+      <h3>Central de Atendimento</h3>
+      <p>Telefone de orientação e agendamento: <strong>0800-123-OUT</strong><br>Atendimento de segunda a sexta, 9h–17h.</p>
+      <a class="btn btn-primary" href="tel:0800123OUT">Ligar agora</a>
+    </article>
+  </div>
+
+  <div style="margin-top:18px;">
+    <h4>Recursos rápidos</h4>
+    <ul class="local-centers">
+      <li><strong>Guia de Direitos</strong> — Informações sobre benefícios e suporte jurídico</li>
+      <li><strong>Nutrição e Exercício</strong> — Dicas para manter saúde durante o tratamento</li>
+      <li><strong>Onde Fazer Exames</strong> — Lista de centros com contato e endereço (veja seção “Centros de Atendimento”)</li>
+    </ul>
+  </div>
+</section>
+
+  <!-- DOCUMENTÁRIOS RECOMENDADOS -->
+  <section id="documentarios" class="container">
+  <h2 class="section-title"><i class="bi bi-film"></i> Documentários e Vídeos</h2>
+  <p class="section-desc">Conteúdo selecionado sobre prevenção, tratamento e inspiração</p>
+
+  <div class="docs-grid">
+    <!-- linha 1 -->
+
+    <!-- 1 -->
+    <article class="doc-card" tabindex="0">
+      <div class="doc-thumb">
+        <iframe src="https://www.youtube.com/embed/luAfE2d_qAQ" title="Prevenção do Câncer de Mama" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <span class="duration">15:30</span>
+      </div>
+      <div class="doc-info">
+        <span class="doc-tag"><i class="bi bi-bookmark-heart-fill"></i> Prevenção</span>
+        <h3>Prevenção do Câncer de Mama</h3>
+        <p>Especialistas explicam a importância dos exames preventivos e do diagnóstico precoce.</p>
+        <!-- abre YouTube em nova aba -->
+        <a class="btn-watch" href="https://youtu.be/luAfE2d_qAQ" target="_blank" rel="noopener"> <i class="bi bi-play-fill"></i> Assistir</a>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="doc-card" tabindex="0">
+      <div class="doc-thumb">
+        <iframe src="https://www.youtube.com/embed/jEclFv-tMXA" title="Histórias de Superação" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <span class="duration">20:45</span>
+      </div>
+      <div class="doc-info">
+        <span class="doc-tag"><i class="bi bi-heart-fill"></i> Inspiração</span>
+        <h3>Histórias de Superação</h3>
+        <p>Mulheres compartilham suas jornadas de luta e vitória contra o câncer.</p>
+        <a class="btn-watch" href="https://youtu.be/jEclFv-tMXA" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> Assistir</a>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="doc-card" tabindex="0">
+      <div class="doc-thumb">
+        <iframe src="https://www.youtube.com/embed/yExTEEoo-4I" title="Avanços no Tratamento" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <span class="duration">18:15</span>
+      </div>
+      <div class="doc-info">
+        <span class="doc-tag"><i class="bi bi-stars"></i> Inovação</span>
+        <h3>Avanços no Tratamento</h3>
+        <p>Novos tratamentos e tecnologias no combate ao câncer de mama.</p>
+        <a class="btn-watch" href="https://youtu.be/yExTEEoo-4I" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> Assistir</a>
+      </div>
+    </article>
+
+    <!-- linha 2 -->
+
+    <!-- 4 -->
+    <article class="doc-card" tabindex="0">
+      <div class="doc-thumb">
+        <iframe src="https://www.youtube.com/embed/KwIvnjbWJ94" title="O Papel da Família" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <span class="duration">12:20</span>
+      </div>
+      <div class="doc-info">
+        <span class="doc-tag"><i class="bi bi-people-fill"></i> Família</span>
+        <h3>O Papel da Família</h3>
+        <p>A importância do apoio familiar durante o tratamento.</p>
+        <a class="btn-watch" href="https://youtu.be/KwIvnjbWJ94" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> Assistir</a>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="doc-card" tabindex="0">
+      <div class="doc-thumb">
+        <iframe src="https://www.youtube.com/embed/nsFgQem91N4" title="Alimentação e Prevenção" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <span class="duration">16:40</span>
+      </div>
+      <div class="doc-info">
+        <span class="doc-tag"><i class="bi bi-cup-hot-fill"></i> Saúde</span>
+        <h3>Alimentação e Prevenção</h3>
+        <p>Guia nutricional para prevenção e durante o tratamento.</p>
+        <a class="btn-watch" href="https://youtu.be/nsFgQem91N4" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> Assistir</a>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="doc-card" tabindex="0">
+      <div class="doc-thumb">
+        <iframe src="https://www.youtube.com/embed/xOWydWbpfnc" title="Exercícios e Bem-estar" frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <span class="duration">14:55</span>
+      </div>
+      <div class="doc-info">
+        <span class="doc-tag"><i class="bi bi-activity"></i> Bem-estar</span>
+        <h3>Exercícios e Bem-estar</h3>
+        <p>Atividades físicas recomendadas durante o tratamento.</p>
+        <a class="btn-watch" href="https://youtu.be/xOWydWbpfnc" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> Assistir</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Video modal (inserido dentro da seção de documentários) -->
+  <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" hidden>
+    <div class="video-modal-backdrop" data-close="true"></div>
+    <div class="video-modal-content" role="document">
+      <button class="video-modal-close" aria-label="Fechar vídeo">&times;</button>
+      <div class="video-wrapper">
+        <iframe id="videoPlayer" width="100%" height="480" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSTITUIR/INSERIR: Centros de Atendimento resumidos em retângulos -->
+<section id="centros-atendimento" class="container">
+  <h2 class="section-title">Centros de Atendimento</h2>
+  <div class="centers-grid">
+    <div class="center-card">
+      <h3>Hospital Regional do Agreste</h3>
+      <p><strong>Telefone:</strong> (81) 4000-0000</p>
+      <p><strong>Endereço:</strong> Rua Exemplo, 123, Caruaru</p>
+    </div>
+
+    <div class="center-card">
+      <h3>Hospital das Clínicas - Oncologia</h3>
+      <p><strong>Telefone:</strong> (81) 4000-1111</p>
+      <p><strong>Endereço:</strong> Av. Exemplo, 456, Recife</p>
+    </div>
+
+    <div class="center-card">
+      <h3>Hospital de Câncer de Pernambuco</h3>
+      <p><strong>Telefone:</strong> (81) 4000-2222</p>
+      <p><strong>Endereço:</strong> R. Exemplo, 789, Recife</p>
+    </div>
+  </div>
+</section>
+
+  <!-- COMO AJUDAR -->
+  <section id="ajudar" class="container">
+    <h2 class="section-title">Como Ajudar</h2>
+    <p class="lead">Envolva-se localmente — voluntariado, doações e divulgação ajudam muito. Abaixo, passos simples para contribuir.</p>
+
+    <div class="help-cards">
+      <article class="help-card">
+        <h3>1. Apoio Emocional</h3>
+        <p>Escute, respeite prazos e ofereça companhia em consultas. Pequenos gestos importam.</p>
+      </article>
+      <article class="help-card">
+        <h3>2. Voluntariado</h3>
+        <p>Participe em campanhas locais — divulgação, logística e eventos em sua comunidade.</p>
+      </article>
+      <article class="help-card">
+        <h3>3. Doações</h3>
+        <p>Contribua com recursos ou itens necessários às unidades de atendimento e pacientes.</p>
+      </article>
+      <article class="help-card">
+        <h3>4. Acompanhamento</h3>
+        <p>Acompanhe consultas e exames quando convidado — apoio prático facilita o tratamento.</p>
+      </article>
+    </div>
+    <h3>Impacto emocional do câncer de mama</h3>
+    <p>O diagnóstico afeta não só o corpo, mas também a mente — variações de humor, ansiedade e necessidade de suporte são comuns.</p>
+    <details>
+      <summary>Saiba mais sobre impacto emocional</summary>
+      <p>Pacientes podem sentir incerteza, frustração, culpa, tristeza, raiva e medo. O apoio de amigos e familiares, além de
+      acompanhamento profissional, é essencial para enfrentar o processo.</p>
+    </details>
+    <div class="maps-and-centers">
+      <h2 class="section-title small">Hospitais e Centros de Atendimento</h2>
+      <div class="map-grid">
+        <div class="map-card">
+          <div class="map-title"><i class="bi bi-geo-alt"></i><span>Hospital de Câncer de Pernambuco</span></div>
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31603.784932517723!2d-34.93025022200969!3d-8.053126343567529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab188626ec7cd5%3A0x56a02bbcbf92f14a!2sHospital%20de%20C%C3%A2ncer%20de%20Pernambuco!5e0!3m2!1spt-BR!2sbr!4v1761083852014!5m2!1spt-BR!2sbr"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <div class="map-card">
+          <div class="map-title"><i class="bi bi-geo-alt"></i><span>Hospital das Clínicas - Oncologia</span></div>
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31604.229481705024!2d-34.98437842568357!3d-8.047428100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab196130a0cf1b%3A0xf0d1b63a0f95f77f!2sHospital%20das%20Cl%C3%ADnicas%20-%20HC-UFPE%20%3A%20Oncologia!5e0!3m2!1spt-BR!2sbr!4v1761084106580!5m2!1spt-BR!2sbr"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <h3>Centros de Atendimento e Contato Local</h3>
+      <ul class="local-centers stacked">
+        <li><strong>Hospital Regional do Agreste</strong> — (81) 4000-0000 — Rua Exemplo, 123, Caruaru</li>
+        <li><strong>Hospital das Clínicas - Oncologia</strong> — (81) 4000-1111 — Av. Exemplo, 456, Recife</li>
+        <li><strong>Hospital de Câncer de Pernambuco</strong> — (81) 4000-2222 — R. Exemplo, 789, Recife</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="container">
+    <h2 class="section-title">Contato</h2>
+    <div class="contact-decor">
+      <!-- decorative pink dots (purely visual) -->
+      <span class="pink-dot" aria-hidden="true"></span>
+      <span class="pink-dot" aria-hidden="true"></span>
+      <div class="contact-grid contact-only-form">
+        <form id="contactForm" class="contact-form contact-only">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" placeholder="Seu Nome" required>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="Seu E-mail" required>
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" placeholder="Escreva sua mensagem..." required></textarea>
+          <button class="btn btn-primary" type="submit">Enviar Mensagem</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Outubro Rosa — Todos os direitos reservados</p>
+  </footer>
+
+  <!-- MODAL DOAÇÃO -->
+  <div class="modal-backdrop" id="donateModal">
+    <div class="modal">
+      <h3>Doar para a campanha</h3>
+      <form id="donateForm">
+        <label><input type="radio" name="amount" value="25"> R$25</label>
+        <label><input type="radio" name="amount" value="50"> R$50</label>
+        <label><input type="radio" name="amount" value="100"> R$100</label>
+        <br><br>
+        <button type="button" class="btn btn-outline" id="closeModal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Confirmar Doação</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Fixed vertical social bar (right side) -->
+  <div class="social-fixed" aria-hidden="false">
+    <a href="#" class="instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+    <a href="#" class="facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="#" class="linkedin" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+    <a href="#" class="github" aria-label="GitHub">
+      <i class="bi bi-github"></i>
+    </a>
+  </div>
+
+  <script>
+    const openDonate = document.getElementById('openDonate');
+    const ctaDoar = document.getElementById('ctaDoar');
+    const donateModal = document.getElementById('donateModal');
+    const closeModal = document.getElementById('closeModal');
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    openDonate.onclick = () => donateModal.style.display = 'flex';
+    ctaDoar.onclick = () => donateModal.style.display = 'flex';
+    closeModal.onclick = () => donateModal.style.display = 'none';
+
+    document.getElementById('donateForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const val = document.querySelector('input[name="amount"]:checked');
+      if (!val) { alert("Escolha um valor."); return }
+      alert("Obrigado por doar R$" + val.value + "!");
+      donateModal.style.display = "none";
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert("Mensagem enviada! Obrigado pelo contato.");
+      e.target.reset();
+    });
+
+    // Tema
+    if (localStorage.getItem("theme") === "dark") { body.classList.add("dark"); toggle.textContent = "☀️"; }
+    toggle.onclick = () => {
+      body.classList.toggle("dark");
+      if (body.classList.contains("dark")) {
+        toggle.textContent = "☀️"; localStorage.setItem("theme", "dark");
+      } else {
+        toggle.textContent = "🌙"; localStorage.setItem("theme", "light");
+      }
+    }
+
+    // Tabs: add per-panel animation class and small decorative triggers
+    (function(){
+      const tabs = document.querySelectorAll('.tab');
+      const panels = document.querySelectorAll('.tab-panel');
+      const contactDecor = document.querySelector('.contact-decor');
+
+      function activateTab(tab){
+        tabs.forEach(t => t.setAttribute('aria-selected','false'));
+        tab.setAttribute('aria-selected','true');
+        const id = tab.getAttribute('aria-controls');
+        panels.forEach(p => { p.hidden = true; p.classList.remove('active-animate') });
+        const panel = document.getElementById(id);
+        if(panel){ panel.hidden = false; panel.classList.add('active-animate') }
+
+        // Decorative trigger: pulse the contact-decor when 'Prevenção e Exames' is selected
+        if(contactDecor){
+          if(tab.textContent.trim().toLowerCase().includes('prevenção')){
+            contactDecor.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.01)' }, { transform: 'scale(1)' }], { duration: 560, easing: 'ease-out' })
+          }
+        }
+      }
+
+      tabs.forEach(t => t.addEventListener('click', e => activateTab(e.currentTarget)));
+      // keyboard nav for tabs (left/right)
+      tabs.forEach(t => t.addEventListener('keydown', e => {
+        if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+          const idx = Array.from(tabs).indexOf(e.currentTarget);
+          const next = e.key === 'ArrowRight' ? tabs[idx+1] || tabs[0] : tabs[idx-1] || tabs[tabs.length-1];
+          next.focus(); activateTab(next);
+        }
+      }));
+    })();
+
+    // Video modal logic
+    (function(){
+      const videoCards = document.querySelectorAll('.btn-watch');
+      const videoModal = document.getElementById('videoModal');
+      const videoPlayer = document.getElementById('videoPlayer');
+      const closeModal = document.querySelector('.video-modal-close');
+
+      videoCards.forEach(card => {
+        card.addEventListener('click', e => {
+          const videoId = card.getAttribute('data-video-id');
+          if(videoId){
+            videoPlayer.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+            videoModal.removeAttribute('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+          }
+        });
+      });
+
+      closeModal.addEventListener('click', e => {
+        videoModal.setAttribute('hidden', 'true');
+        videoPlayer.src = ""; // Stop video when closing
+        document.body.style.overflow = ''; // Restore background scroll
+      });
+
+      // Close modal on backdrop click
+      videoModal.addEventListener('click', e => {
+        if(e.target.classList.contains('video-modal-backdrop')){
+          videoModal.setAttribute('hidden', 'true');
+          videoPlayer.src = ""; // Stop video when closing
+          document.body.style.overflow = ''; // Restore background scroll
+        }
+      });
+    })();
+  </script>
 </body>
+
 </html>
