@@ -1,26 +1,11 @@
-# Outrobro Rosa-🌌 
+# 🌸 Outubro Rosa
 
+> Site em desenvolvimento para conscientização sobre o câncer de mama
 
-# Site em Desevolvimento - 😱
+## 👥 Equipe
+- **Rayanne Camili** - HTML
+- **Bruno Gllalker** - JavaScript  
+- **Ailton Coelho** - ✅ **CSS**
 
-
-
-#      -- Tarefas - Coloque o seu nome do lado -- 
-#
-#  -- DEVS | Rayanne Camili,Bruno Gllalker,Ailton Coelho --
-#  
-#        -- Frot-end --
-#
-#      * Tarefas *
-#
-# (-) Conteudo HTML: 
-# 
-# (X) Style CSS  : Ailton Coelho
-#
-# (-) 
-#
-#
-#
-#
-#
-#
+## 🎯 Objetivo
+Site educativo sobre prevenção e diagnóstico do câncer de mama
