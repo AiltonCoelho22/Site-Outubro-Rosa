@@ -672,7 +672,7 @@ footer { background: linear-gradient(90deg, var(--pink-900), var(--purple-600));
     
     .tab {
         width: 100%;
-        text-align: left;
+        text-align: center;
         padding: 10px 14px;
     }
 

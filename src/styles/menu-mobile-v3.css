@@ -142,7 +142,7 @@
 
     .menu-toggle:hover {
         background:transparent;
-        color: var(--pink-700);
+        color: var(--pi);
         transform: scale(1.05);
     }
 
