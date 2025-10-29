@@ -729,3 +729,66 @@ body.dark .story-modal-body .story-message { background: rgba(255,182,193,0.06);
 .social-fixed a.facebook:hover {
   display: none;
 }
+
+/* ====== RESPONSIVE: Mobile menu, video modal and small-screen tweaks ====== */
+/* Mobile menu button (hidden on large screens) */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--pink-700);
+    cursor: pointer;
+    padding: 8px;
+}
+
+/* When on small screens, hide nav links by default and show mobile button */
+@media (max-width: 900px) {
+    .mobile-menu-btn { display: inline-flex; align-items:center; gap:8px }
+    nav.main-nav { position: absolute; right: 16px; top: 64px; background: var(--card); flex-direction: column; padding: 12px; border-radius: 10px; box-shadow: 0 8px 30px var(--shadow);
+        /* prepare for smooth open/close */
+        max-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px); transition: max-height .36s cubic-bezier(.2,.9,.3,1), opacity .28s ease, transform .28s ease; }
+    nav.main-nav.open { max-height: 520px; opacity: 1; transform: translateY(0); }
+    nav.main-nav a, nav.main-nav button.cta-donate, nav.main-nav .theme-toggle { display: block; margin: 6px 0; }
+    .header-inner { position: relative }
+}
+
+/* Hide fixed social bar on very small devices to avoid overlap */
+@media (max-width: 600px) {
+    .social-fixed { display: none }
+}
+
+/* Smooth modal backdrop and modal enter/exit animations */
+.modal-backdrop { display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s linear; }
+.modal-backdrop.show { opacity: 1; visibility: visible; }
+.modal { transform: translateY(8px) scale(.995); transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease, opacity .22s ease; opacity: 0 }
+.modal-backdrop.show .modal { transform: translateY(0) scale(1); opacity: 1 }
+
+/* Video modal smooth appearance */
+.video-modal { opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s linear; }
+.video-modal.show { opacity: 1; visibility: visible; }
+.video-modal .story-modal-content { transform: translateY(8px) scale(.995); transition: transform .28s cubic-bezier(.2,.9,.3,1), opacity .22s ease; opacity: 0 }
+.video-modal.show .story-modal-content { transform: translateY(0) scale(1); opacity: 1 }
+
+/* Mobile menu button subtle rotation when opened */
+.mobile-menu-btn { transition: transform .24s cubic-bezier(.2,.9,.3,1), color .18s ease }
+.mobile-menu-btn.open { transform: rotate(90deg); color: var(--pink-900) }
+
+/* Hero rotating phrases: smoother fade (fallback to existing transition) */
+.rotating-phrases .phrase { transition: opacity .6s cubic-bezier(.2,.9,.3,1), transform .6s cubic-bezier(.2,.9,.3,1), text-shadow .6s ease }
+
+@keyframes subtleFloat {
+    0% { transform: translateY(0) }
+    50% { transform: translateY(-6px) }
+    100% { transform: translateY(0) }
+}
+.side-glows .glow-left, .side-glows .glow-right { animation: subtleFloat 8s ease-in-out infinite }
+
+/* Make the video modal responsive with 16:9 aspect ratio */
+.video-wrapper { position: relative; width: 100%; padding-top: 56.25%; }
+.video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 }
+
+/* Improve donate modal responsiveness on tiny screens */
+@media (max-width: 420px) {
+    .modal { margin: 12px; max-width: calc(100% - 24px); }
+}

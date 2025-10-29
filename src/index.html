@@ -26,6 +26,7 @@
         <h1>Outubro Rosa</h1>
         <small>Informar • Prevenir • Apoiar</small>
       </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
       <nav class="main-nav" role="navigation" aria-label="Menu principal">
         <a href="#sobre" role="link">Sobre</a>
         <a href="#prevencao" role="link">Prevenção</a>
@@ -371,7 +372,7 @@
     <div class="video-modal-content" role="document">
       <button class="video-modal-close" aria-label="Fechar vídeo">&times;</button>
       <div class="video-wrapper">
-        <iframe id="videoPlayer" width="100%" height="480" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -516,13 +517,14 @@
     const openDonate = document.getElementById('openDonate');
     const ctaDoar = document.getElementById('ctaDoar');
     const donateModal = document.getElementById('donateModal');
-    const closeModal = document.getElementById('closeModal');
+  const closeDonate = document.getElementById('closeModal');
     const toggle = document.getElementById('themeToggle');
     const body = document.body;
 
-    openDonate.onclick = () => donateModal.style.display = 'flex';
-    ctaDoar.onclick = () => donateModal.style.display = 'flex';
-    closeModal.onclick = () => donateModal.style.display = 'none';
+  // Abrir/fechar modal de doação com transições suaves (usa classe .show)
+  openDonate.onclick = () => { donateModal.classList.add('show'); document.body.style.overflow = 'hidden'; };
+  ctaDoar.onclick = () => { donateModal.classList.add('show'); document.body.style.overflow = 'hidden'; };
+  closeDonate.onclick = () => { donateModal.classList.remove('show'); document.body.style.overflow = ''; };
 
     document.getElementById('donateForm').addEventListener('submit', e => {
       e.preventDefault();
@@ -547,6 +549,26 @@
       } else {
         toggle.textContent = "🌙"; localStorage.setItem("theme", "light");
       }
+    }
+
+    // Menu móvel: alterna a visibilidade da navegação em telas pequenas
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.querySelector('.main-nav');
+      if (mobileBtn && mainNav) {
+      mobileBtn.addEventListener('click', e => {
+        const opened = mainNav.classList.toggle('open');
+        mobileBtn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        mobileBtn.classList.toggle('open', opened);
+      });
+
+      // Fecha o menu ao clicar fora
+      document.addEventListener('click', e => {
+        if (!mainNav.contains(e.target) && !mobileBtn.contains(e.target) && mainNav.classList.contains('open')) {
+          mainNav.classList.remove('open');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          mobileBtn.classList.remove('open');
+        }
+      });
     }
 
     // Tabs: add per-panel animation class and small decorative triggers
@@ -587,31 +609,47 @@
       const videoCards = document.querySelectorAll('.btn-watch');
       const videoModal = document.getElementById('videoModal');
       const videoPlayer = document.getElementById('videoPlayer');
-      const closeModal = document.querySelector('.video-modal-close');
+      const closeVideo = document.querySelector('.video-modal-close');
 
       videoCards.forEach(card => {
         card.addEventListener('click', e => {
-          const videoId = card.getAttribute('data-video-id');
+          // tenta extrair data-video-id; se não existir, tenta extrair do href
+          let videoId = card.getAttribute('data-video-id');
+          if(!videoId){
+            const href = card.getAttribute('href') || '';
+            const m = href.match(/(?:youtu.be\/|embed\/|v=)([A-Za-z0-9_-]{6,})/);
+            videoId = m ? m[1] : null;
+          }
           if(videoId){
             videoPlayer.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+            // show modal with smooth transition
             videoModal.removeAttribute('hidden');
+            // small timeout to allow CSS transitions when class is added
+            setTimeout(() => videoModal.classList.add('show'), 20);
             document.body.style.overflow = 'hidden'; // Prevent background scroll
           }
         });
       });
 
-      closeModal.addEventListener('click', e => {
-        videoModal.setAttribute('hidden', 'true');
-        videoPlayer.src = ""; // Stop video when closing
-        document.body.style.overflow = ''; // Restore background scroll
+      closeVideo.addEventListener('click', e => {
+        videoModal.classList.remove('show');
+        // wait for transition to finish before hiding and stopping video
+        setTimeout(() => {
+          videoModal.setAttribute('hidden', 'true');
+          videoPlayer.src = ""; // Stop video when closing
+          document.body.style.overflow = ''; // Restore background scroll
+        }, 300);
       });
 
       // Close modal on backdrop click
       videoModal.addEventListener('click', e => {
         if(e.target.classList.contains('video-modal-backdrop')){
-          videoModal.setAttribute('hidden', 'true');
-          videoPlayer.src = ""; // Stop video when closing
-          document.body.style.overflow = ''; // Restore background scroll
+          videoModal.classList.remove('show');
+          setTimeout(() => {
+            videoModal.setAttribute('hidden', 'true');
+            videoPlayer.src = ""; // Stop video when closing
+            document.body.style.overflow = ''; // Restore background scroll
+          }, 300);
         }
       });
     })();
