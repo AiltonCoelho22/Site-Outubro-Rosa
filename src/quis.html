@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Outubro Rosa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        :root {
+            --pink-900: #c2185b;
+            --pink-700: #e91e63;
+            --pink-400: #ff79a8;
+            --purple-600: #9c27b0;
+            --rose-50: #fff0f6;
+            --muted: #666a73;
+            --dark: #111318;
+            --max-width: 1200px;
+            --bg: #fff;
+            --text: #111;
+            --card: #fff;
+            --shadow: rgba(0, 0, 0, 0.08);
+            
+            /* Variáveis responsivas */
+            --font-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+            --font-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+            --font-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+            --font-lg: clamp(1.125rem, 1rem + 0.625vw, 1.375rem);
+            --font-xl: clamp(1.25rem, 1.125rem + 0.625vw, 1.75rem);
+            --font-2xl: clamp(1.5rem, 1.375rem + 0.625vw, 2rem);
+            --font-3xl: clamp(1.875rem, 1.75rem + 0.625vw, 2.5rem);
+            
+            --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+            --space-sm: clamp(0.75rem, 0.7rem + 0.25vw, 1rem);
+            --space-md: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+            --space-lg: clamp(1.5rem, 1.4rem + 0.5vw, 2rem);
+            --space-xl: clamp(2rem, 1.85rem + 0.75vw, 3rem);
+        }
+
+        body.dark {
+            --bg: #111318;
+            --text: #f5f5f5;
+            --card: #1e1e26;
+            --shadow: rgba(233, 30, 99, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-sm);
+            transition: background-color .3s, color .3s;
+            font-size: var(--font-base);
+        }
+
+        .quiz-container {
+            max-width: min(800px, 95vw);
+            width: 100%;
+            background: var(--card);
+            border-radius: clamp(12px, 2vw, 20px);
+            box-shadow: 0 10px 30px var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .quiz-header {
+            background: linear-gradient(90deg, var(--pink-900), var(--purple-600));
+            color: white;
+            padding: clamp(20px, 4vw, 25px) clamp(15px, 3vw, 30px);
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .quiz-header p {
+            opacity: 0.9;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        .quiz-content {
+            padding: clamp(20px, 4vw, 30px);
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(20px, 4vw, 25px);
+            background: var(--rose-50);
+            padding: clamp(12px, 3vw, 15px) clamp(15px, 3vw, 20px);
+            border-radius: 12px;
+            border-left: 5px solid var(--pink-700);
+            gap: 10px;
+        }
+
+        .timer {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 700;
+            color: var(--pink-900);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .score {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            color: var(--pink-700);
+            text-align: right;
+        }
+
+        .question-container {
+            margin-bottom: clamp(20px, 4vw, 25px);
+        }
+
+        .question-number {
+            font-size: var(--font-sm);
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 600;
+            margin-bottom: clamp(15px, 3vw, 20px);
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8px, 2vw, 12px);
+            margin-bottom: clamp(20px, 4vw, 25px);
+        }
+
+        .option {
+            padding: clamp(12px, 3vw, 15px) clamp(15px, 3vw, 20px);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 2vw, 12px);
+            min-height: 60px;
+        }
+
+        .option:hover {
+            border-color: var(--pink-400);
+            background: rgba(255, 121, 168, 0.05);
+        }
+
+        .option.selected {
+            border-color: var(--pink-700);
+            background: rgba(233, 30, 99, 0.1);
+        }
+
+        .option.correct {
+            border-color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .option-letter {
+            width: clamp(28px, 6vw, 30px);
+            height: clamp(28px, 6vw, 30px);
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--muted);
+            flex-shrink: 0;
+            font-size: var(--font-sm);
+        }
+
+        .option.selected .option-letter {
+            background: var(--pink-700);
+            color: white;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: clamp(10px, 3vw, 15px);
+        }
+
+        .btn {
+            padding: clamp(10px, 2.5vw, 12px) clamp(15px, 3vw, 24px);
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: var(--font-base);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+            min-height: 50px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--pink-900), var(--purple-600));
+            color: white;
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--pink-700);
+            color: var(--pink-700);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(233, 30, 99, 0.1);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .result-container {
+            text-align: center;
+            padding: clamp(25px, 5vw, 30px);
+        }
+
+        .result-title {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            margin-bottom: clamp(12px, 3vw, 15px);
+            color: var(--pink-900);
+        }
+
+        .result-score {
+            font-size: clamp(2.5rem, 8vw, 3rem);
+            font-weight: 800;
+            margin: clamp(15px, 4vw, 20px) 0;
+            color: var(--pink-700);
+        }
+
+        .result-message {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: clamp(20px, 4vw, 25px);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .qr-container {
+            margin: clamp(20px, 4vw, 25px) auto;
+            padding: clamp(15px, 3vw, 20px);
+            background: white;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+        }
+
+        .qr-title {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        #qrcode {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #qrcode canvas {
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        .prize-message {
+            background: linear-gradient(45deg, var(--pink-400), var(--pink-700));
+            color: white;
+            padding: clamp(12px, 3vw, 15px) clamp(15px, 3vw, 20px);
+            border-radius: 12px;
+            margin: clamp(15px, 4vw, 20px) 0;
+            font-weight: 600;
+            font-size: var(--font-base);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: clamp(15px, 3vw, 20px);
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink-400), var(--pink-700));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .welcome-screen, .result-screen {
+            text-align: center;
+            padding: clamp(30px, 6vw, 40px) clamp(20px, 4vw, 30px);
+        }
+
+        .welcome-title {
+            font-size: clamp(1.8rem, 5vw, 2rem);
+            margin-bottom: clamp(12px, 3vw, 15px);
+            color: var(--pink-900);
+        }
+
+        .welcome-text {
+            margin-bottom: clamp(25px, 5vw, 30px);
+            color: var(--text);
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            line-height: 1.5;
+        }
+
+        .rules {
+            text-align: left;
+            background: var(--rose-50);
+            padding: clamp(15px, 3vw, 20px);
+            border-radius: 12px;
+            margin-bottom: clamp(25px, 5vw, 30px);
+        }
+
+        .rules h3 {
+            margin-bottom: 10px;
+            color: var(--pink-700);
+            font-size: var(--font-lg);
+        }
+
+        .rules ul {
+            padding-left: 20px;
+        }
+
+        .rules li {
+            margin-bottom: 8px;
+            font-size: var(--font-base);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: clamp(15px, 3vw, 20px);
+            right: clamp(15px, 3vw, 20px);
+            background: transparent;
+            border: none;
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            cursor: pointer;
+            color: var(--pink-700);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(233, 30, 99, 0.1);
+        }
+
+        /* Melhorias para telas muito pequenas (telefones) */
+        @media (max-width: 480px) {
+            .timer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            
+            .timer, .score {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .quiz-footer {
+                flex-direction: column;
+            }
+            
+            .option {
+                min-height: 55px;
+                padding: 12px 15px;
+            }
+            
+            .btn {
+                min-height: 48px;
+            }
+            
+            .rules {
+                padding: 15px;
+            }
+            
+            .rules li {
+                font-size: var(--font-sm);
+            }
+        }
+
+        /* Melhorias para tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .quiz-container {
+                max-width: 90%;
+            }
+            
+            .quiz-content {
+                padding: 25px;
+            }
+            
+            .option {
+                min-height: 65px;
+            }
+        }
+
+        /* Melhorias para orientação paisagem em telefones */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+                justify-content: flex-start;
+            }
+            
+            .quiz-container {
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+            }
+            
+            .timer-container {
+                margin-bottom: 15px;
+                padding: 10px 15px;
+            }
+            
+            .question-container {
+                margin-bottom: 15px;
+            }
+            
+            .options-container {
+                margin-bottom: 15px;
+                gap: 8px;
+            }
+            
+            .option {
+                min-height: 50px;
+                padding: 10px 15px;
+            }
+        }
+
+        /* Modo escuro */
+        body.dark .option {
+            border-color: #444;
+        }
+
+        body.dark .rules {
+            background: rgba(255, 121, 168, 0.1);
+        }
+
+        body.dark .timer-container {
+            background: rgba(255, 121, 168, 0.1);
+        }
+
+        body.dark .qr-container {
+            background: #2a2a2a;
+        }
+
+        /* Animações para melhor UX */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-screen, .result-screen, .welcome-screen {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Melhorar acessibilidade em toque */
+        @media (hover: none) {
+            .option:hover {
+                border-color: #e0e0e0;
+                background: transparent;
+            }
+            
+            .option:active {
+                border-color: var(--pink-700);
+                background: rgba(233, 30, 99, 0.1);
+            }
+            
+            .btn-primary:hover {
+                transform: none;
+            }
+        }
+
+        /* Prevenir zoom em iOS ao focar inputs */
+        @media (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        <i class="bi bi-moon-stars"></i>
+    </button>
+
+    <div class="quiz-container">
+        <!-- Tela de Boas-Vindas -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <h1 class="welcome-title">Quiz Outubro Rosa</h1>
+            <p class="welcome-text">Teste seus conhecimentos sobre prevenção do câncer de mama e concorra a prêmios!</p>
+            
+            <div class="rules">
+                <h3>Como funciona:</h3>
+                <ul>
+                    <li>10 perguntas sobre Outubro Rosa e prevenção</li>
+                    <li>60 segundos para responder cada pergunta</li>
+                    <li>Acertando 5 ou mais, você ganha um prêmio!</li>
+                    <li>No final, gere um QR Code para compartilhar</li>
+                </ul>
+            </div>
+            
+            <button class="btn btn-primary" id="startQuiz">
+                <i class="bi bi-play-circle"></i> Iniciar Quiz
+            </button>
+        </div>
+
+        <!-- Tela do Quiz -->
+        <div class="quiz-screen" id="quizScreen" style="display: none;">
+            <div class="quiz-header">
+                <h1>Quiz Outubro Rosa</h1>
+                <p>Teste seus conhecimentos sobre prevenção</p>
+            </div>
+            
+            <div class="quiz-content">
+                <div class="timer-container">
+                    <div class="timer">
+                        <i class="bi bi-clock"></i>
+                        <span id="timeLeft">60</span> segundos
+                    </div>
+                    <div class="score">
+                        Pontuação: <span id="currentScore">0</span>/10
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress" id="quizProgress" style="width: 0%"></div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-number">Pergunta <span id="currentQuestion">1</span> de 10</div>
+                    <div class="question-text" id="questionText">Carregando pergunta...</div>
+                </div>
+                
+                <div class="options-container" id="optionsContainer">
+                    <!-- As opções serão inseridas aqui via JavaScript -->
+                </div>
+                
+                <div class="quiz-footer">
+                    <button class="btn btn-outline" id="prevQuestion" disabled>
+                        <i class="bi bi-arrow-left"></i> Anterior
+                    </button>
+                    <button class="btn btn-primary" id="nextQuestion">
+                        Próxima <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Resultados -->
+        <div class="result-screen" id="resultScreen" style="display: none;">
+            <h1 class="result-title">Quiz Concluído!</h1>
+            
+            <div class="result-score" id="finalScore">0/10</div>
+            
+            <div class="result-message" id="resultMessage">
+                Carregando resultado...
+            </div>
+            
+            <div id="prizeMessage" class="prize-message" style="display: none;">
+                <i class="bi bi-gift"></i> Parabéns! Você ganhou um prêmio!
+            </div>
+            
+            <div class="qr-container">
+                <div class="qr-title">Compartilhe este quiz:</div>
+                <div id="qrcode"></div>
+            </div>
+            
+            <button class="btn btn-primary" id="restartQuiz">
+                <i class="bi bi-arrow-repeat"></i> Jogar Novamente
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Dados do quiz
+        const quizData = [
+            {
+                question: "O que é o Outubro Rosa?",
+                options: [
+                    "Campanha de conscientização sobre o câncer de mama",
+                    "Mês de prevenção do câncer de próstata",
+                    "Campanha de doação de sangue",
+                    "Mês de conscientização sobre saúde mental"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual é a principal forma de detecção precoce do câncer de mama?",
+                options: [
+                    "Autoexame mensal",
+                    "Mamografia regular",
+                    "Ultrassom das mamas",
+                    "Exame de sangue"
+                ],
+                correct: 1
+            },
+            {
+                question: "Com que frequência mulheres acima de 40 anos devem fazer mamografia?",
+                options: [
+                    "A cada 6 meses",
+                    "A cada 1 ano",
+                    "A cada 2 anos",
+                    "A cada 5 anos"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual desses é um fator de risco para o câncer de mama?",
+                options: [
+                    "Histórico familiar",
+                    "Consumo moderado de café",
+                    "Exercícios físicos regulares",
+                    "Dieta vegetariana"
+                ],
+                correct: 0
+            },
+            {
+                question: "O autoexame das mamas deve ser feito:",
+                options: [
+                    "Diariamente",
+                    "Semanalmente",
+                    "Mensalmente",
+                    "Anualmente"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual é a idade recomendada para começar a fazer mamografia de rastreamento?",
+                options: [
+                    "30 anos",
+                    "40 anos",
+                    "50 anos",
+                    "60 anos"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual destes sinais pode indicar câncer de mama?",
+                options: [
+                    "Nódulo ou caroço na mama",
+                    "Dor de cabeça frequente",
+                    "Tosse persistente",
+                    "Manchas nas unhas"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual porcentagem de casos de câncer de mama é descoberta pelas próprias mulheres?",
+                options: [
+                    "Cerca de 20%",
+                    "Cerca de 40%",
+                    "Cerca de 65%",
+                    "Cerca de 90%"
+                ],
+                correct: 2
+            },
+            {
+                question: "Além da mamografia, qual outro exame pode ser usado para avaliar as mamas?",
+                options: [
+                    "Ressonância magnética",
+                    "Tomografia computadorizada",
+                    "Raio-X dos pulmões",
+                    "Eletrocardiograma"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual hábito de vida ajuda na prevenção do câncer de mama?",
+                options: [
+                    "Prática regular de atividade física",
+                    "Consumo excessivo de álcool",
+                    "Tabagismo",
+                    "Sedentarismo"
+                ],
+                correct: 0
+            }
+        ];
+
+        // Elementos DOM
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        const startQuizBtn = document.getElementById('startQuiz');
+        const restartQuizBtn = document.getElementById('restartQuiz');
+        const prevQuestionBtn = document.getElementById('prevQuestion');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const currentQuestionEl = document.getElementById('currentQuestion');
+        const currentScoreEl = document.getElementById('currentScore');
+        const timeLeftEl = document.getElementById('timeLeft');
+        const quizProgress = document.getElementById('quizProgress');
+        const finalScoreEl = document.getElementById('finalScore');
+        const resultMessage = document.getElementById('resultMessage');
+        const prizeMessage = document.getElementById('prizeMessage');
+        const themeToggle = document.getElementById('themeToggle');
+        const qrcodeContainer = document.getElementById('qrcode');
+
+        // Variáveis do quiz
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let timer;
+        let timeLeft = 60;
+
+        // Inicialização
+        function initQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers.fill(null);
+            updateProgress();
+            showQuestion();
+            startTimer();
+        }
+
+        // Mostrar pergunta atual
+        function showQuestion() {
+            const question = quizData[currentQuestionIndex];
+            questionText.textContent = question.question;
+            currentQuestionEl.textContent = currentQuestionIndex + 1;
+            currentScoreEl.textContent = score;
+            
+            // Limpar opções anteriores
+            optionsContainer.innerHTML = '';
+            
+            // Adicionar novas opções
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Atualizar estado dos botões
+            prevQuestionBtn.disabled = currentQuestionIndex === 0;
+            nextQuestionBtn.textContent = currentQuestionIndex === quizData.length - 1 ? 'Finalizar' : 'Próxima';
+            nextQuestionBtn.innerHTML = currentQuestionIndex === quizData.length - 1 ? 
+                'Finalizar <i class="bi bi-check-circle"></i>' : 
+                'Próxima <i class="bi bi-arrow-right"></i>';
+        }
+
+        // Selecionar uma opção
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Atualizar visual das opções
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Verificar se a resposta está correta
+            if (optionIndex === quizData[currentQuestionIndex].correct) {
+                // Só adiciona pontos se ainda não tiver respondido esta pergunta
+                if (userAnswers[currentQuestionIndex] !== quizData[currentQuestionIndex].correct) {
+                    score++;
+                    currentScoreEl.textContent = score;
+                }
+            } else {
+                // Se mudou de uma resposta correta para incorreta, remove ponto
+                if (userAnswers[currentQuestionIndex] === quizData[currentQuestionIndex].correct) {
+                    score--;
+                    currentScoreEl.textContent = score;
+                }
+            }
+        }
+
+        // Navegar para próxima pergunta
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                resetTimer();
+                showQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        // Navegar para pergunta anterior
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                resetTimer();
+                showQuestion();
+            }
+        }
+
+        // Temporizador
+        function startTimer() {
+            clearInterval(timer);
+            timeLeft = 60;
+            timeLeftEl.textContent = timeLeft;
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                timeLeftEl.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // Se o tempo acabar, avança automaticamente para a próxima pergunta
+                    if (currentQuestionIndex < quizData.length - 1) {
+                        currentQuestionIndex++;
+                        resetTimer();
+                        showQuestion();
+                    } else {
+                        finishQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            startTimer();
+        }
+
+        // Atualizar barra de progresso
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            quizProgress.style.width = `${progress}%`;
+        }
+
+        // Finalizar quiz
+        function finishQuiz() {
+            clearInterval(timer);
+            quizScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+            
+            // Calcular pontuação final
+            let finalScore = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correct) {
+                    finalScore++;
+                }
+            });
+            
+            finalScoreEl.textContent = `${finalScore}/${quizData.length}`;
+            
+            // Mensagem baseada na pontuação
+            if (finalScore >= 8) {
+                resultMessage.textContent = "Excelente! Você demonstrou ótimo conhecimento sobre o Outubro Rosa e prevenção do câncer de mama.";
+            } else if (finalScore >= 5) {
+                resultMessage.textContent = "Muito bom! Você tem um bom conhecimento, mas ainda pode aprender mais sobre prevenção.";
+            } else {
+                resultMessage.textContent = "Continue aprendendo! A conscientização é o primeiro passo para a prevenção.";
+            }
+            
+            // Mostrar mensagem de prêmio se necessário
+            if (finalScore >= 5) {
+                prizeMessage.style.display = 'block';
+            }
+            
+            // Gerar QR Code
+            generateQRCode();
+        }
+
+        // Gerar QR Code
+        function generateQRCode() {
+            qrcodeContainer.innerHTML = '';
+            const quizUrl = window.location.href;
+            const qrSize = Math.min(200, window.innerWidth * 0.6);
+            
+            QRCode.toCanvas(qrcodeContainer, quizUrl, {
+                width: qrSize,
+                height: qrSize,
+                colorDark: "#e91e63",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            }, function(error) {
+                if (error) console.error(error);
+            });
+        }
+
+        // Alternar tema claro/escuro
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark')) {
+                icon.classList.remove('bi-moon-stars');
+                icon.classList.add('bi-brightness-high');
+            } else {
+                icon.classList.remove('bi-brightness-high');
+                icon.classList.add('bi-moon-stars');
+            }
+            
+            // Salvar preferência
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Carregar tema salvo
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                themeToggle.querySelector('i').classList.remove('bi-moon-stars');
+                themeToggle.querySelector('i').classList.add('bi-brightness-high');
+            }
+        }
+
+        // Event Listeners
+        startQuizBtn.addEventListener('click', () => {
+            welcomeScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            initQuiz();
+        });
+
+        restartQuizBtn.addEventListener('click', () => {
+            resultScreen.style.display = 'none';
+            welcomeScreen.style.display = 'block';
+        });
+
+        prevQuestionBtn.addEventListener('click', prevQuestion);
+        nextQuestionBtn.addEventListener('click', nextQuestion);
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Inicializar
+        loadTheme();
+    </script>
+</body>
+</html>
