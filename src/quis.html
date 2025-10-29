@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Outubro Rosa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
@@ -22,7 +24,7 @@
             --text: #111;
             --card: #fff;
             --shadow: rgba(0, 0, 0, 0.08);
-            
+
             /* Variáveis responsivas */
             --font-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
             --font-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
@@ -31,7 +33,7 @@
             --font-xl: clamp(1.25rem, 1.125rem + 0.625vw, 1.75rem);
             --font-2xl: clamp(1.5rem, 1.375rem + 0.625vw, 2rem);
             --font-3xl: clamp(1.875rem, 1.75rem + 0.625vw, 2.5rem);
-            
+
             --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
             --space-sm: clamp(0.75rem, 0.7rem + 0.25vw, 1rem);
             --space-md: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
@@ -342,7 +344,8 @@
             transition: width 0.3s ease;
         }
 
-        .welcome-screen, .result-screen {
+        .welcome-screen,
+        .result-screen {
             text-align: center;
             padding: clamp(30px, 6vw, 40px) clamp(20px, 4vw, 30px);
         }
@@ -425,37 +428,38 @@
                 text-align: center;
                 gap: 8px;
             }
-            
-            .timer, .score {
+
+            .timer,
+            .score {
                 justify-content: center;
                 width: 100%;
             }
-            
+
             .quiz-footer {
                 flex-direction: column;
             }
-            
+
             .option {
                 min-height: 55px;
                 padding: 12px 15px;
             }
-            
+
             .btn {
                 min-height: 48px;
             }
-            
+
             .rules {
                 padding: 15px;
             }
-            
+
             .rules li {
                 font-size: var(--font-sm);
             }
-            
+
             .result-actions {
                 flex-direction: column;
             }
-            
+
             .result-actions .btn {
                 min-width: 100%;
             }
@@ -466,11 +470,11 @@
             .quiz-container {
                 max-width: 90%;
             }
-            
+
             .quiz-content {
                 padding: 25px;
             }
-            
+
             .option {
                 min-height: 65px;
             }
@@ -482,30 +486,30 @@
                 padding: 10px;
                 justify-content: flex-start;
             }
-            
+
             .quiz-container {
                 max-height: 95vh;
                 overflow-y: auto;
             }
-            
+
             .quiz-content {
                 padding: 20px;
             }
-            
+
             .timer-container {
                 margin-bottom: 15px;
                 padding: 10px 15px;
             }
-            
+
             .question-container {
                 margin-bottom: 15px;
             }
-            
+
             .options-container {
                 margin-bottom: 15px;
                 gap: 8px;
             }
-            
+
             .option {
                 min-height: 50px;
                 padding: 10px 15px;
@@ -531,11 +535,20 @@
 
         /* Animações para melhor UX */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .quiz-screen, .result-screen, .welcome-screen {
+        .quiz-screen,
+        .result-screen,
+        .welcome-screen {
             animation: fadeIn 0.5s ease-out;
         }
 
@@ -545,12 +558,12 @@
                 border-color: #e0e0e0;
                 background: transparent;
             }
-            
+
             .option:active {
                 border-color: var(--pink-700);
                 background: rgba(233, 30, 99, 0.1);
             }
-            
+
             .btn-primary:hover {
                 transform: none;
             }
@@ -558,7 +571,10 @@
 
         /* Prevenir zoom em iOS ao focar inputs */
         @media (max-width: 768px) {
-            input, select, textarea {
+
+            input,
+            select,
+            textarea {
                 font-size: 16px;
             }
         }
@@ -590,6 +606,7 @@
         }
     </style>
 </head>
+
 <body>
     <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
         <i class="bi bi-moon-stars"></i>
@@ -600,7 +617,7 @@
         <div class="welcome-screen" id="welcomeScreen">
             <h1 class="welcome-title">Quiz Outubro Rosa</h1>
             <p class="welcome-text">Teste seus conhecimentos sobre prevenção do câncer de mama e concorra a brindes!</p>
-            
+
             <div class="rules">
                 <h3>Como funciona:</h3>
                 <ul>
@@ -611,7 +628,7 @@
                     <li>Volte automaticamente para a página principal após o quiz</li>
                 </ul>
             </div>
-            
+
             <button class="btn btn-primary" id="startQuiz">
                 <i class="bi bi-play-circle"></i> Iniciar Quiz
             </button>
@@ -623,7 +640,7 @@
                 <h1>Quiz Outubro Rosa</h1>
                 <p>Teste seus conhecimentos sobre prevenção</p>
             </div>
-            
+
             <div class="quiz-content">
                 <div class="timer-container">
                     <div class="timer">
@@ -634,20 +651,20 @@
                         Pontuação: <span id="currentScore">0</span>/10
                     </div>
                 </div>
-                
+
                 <div class="progress-bar">
                     <div class="progress" id="quizProgress" style="width: 0%"></div>
                 </div>
-                
+
                 <div class="question-container">
                     <div class="question-number">Pergunta <span id="currentQuestion">1</span> de 10</div>
                     <div class="question-text" id="questionText">Carregando pergunta...</div>
                 </div>
-                
+
                 <div class="options-container" id="optionsContainer">
                     <!-- As opções serão inseridas aqui via JavaScript -->
                 </div>
-                
+
                 <div class="quiz-footer">
                     <button class="btn btn-outline" id="prevQuestion" disabled>
                         <i class="bi bi-arrow-left"></i> Anterior
@@ -662,17 +679,17 @@
         <!-- Tela de Resultados -->
         <div class="result-screen" id="resultScreen" style="display: none;">
             <h1 class="result-title">Quiz Concluído!</h1>
-            
+
             <div class="result-score" id="finalScore">0/10</div>
-            
+
             <div class="result-message" id="resultMessage">
                 Carregando resultado...
             </div>
-            
+
             <div id="prizeMessage" class="prize-message" style="display: none;">
                 <i class="bi bi-gift"></i> Parabéns! Você ganhou um brinde!
             </div>
-            
+
             <div class="qr-container">
                 <div class="qr-title">Compartilhe este quiz:</div>
                 <div id="qrcode"></div>
@@ -682,7 +699,7 @@
                 <div class="countdown-text">Voltando automaticamente para a página principal em:</div>
                 <div class="countdown-timer" id="countdownTimer">10 segundos</div>
             </div>
-            
+
             <div class="result-actions">
                 <button class="btn btn-primary" id="restartQuiz">
                     <i class="bi bi-arrow-repeat"></i> Jogar Novamente
@@ -693,398 +710,430 @@
             </div>
         </div>
     </div>
+<script>
+    // Dados do quiz
+    const quizData = [
+        {
+            question: "O que é o Outubro Rosa?",
+            options: [
+                "Campanha de conscientização sobre o câncer de mama",
+                "Mês de prevenção do câncer de próstata",
+                "Campanha de doação de sangue",
+                "Mês de conscientização sobre saúde mental"
+            ],
+            correct: 0
+        },
+        {
+            question: "Qual é a principal forma de detecção precoce do câncer de mama?",
+            options: [
+                "Autoexame mensal",
+                "Mamografia regular",
+                "Ultrassom das mamas",
+                "Exame de sangue"
+            ],
+            correct: 1
+        },
+        {
+            question: "Com que frequência mulheres acima de 40 anos devem fazer mamografia?",
+            options: [
+                "A cada 6 meses",
+                "A cada 1 ano",
+                "A cada 2 anos",
+                "A cada 5 anos"
+            ],
+            correct: 2
+        },
+        {
+            question: "Qual desses é um fator de risco para o câncer de mama?",
+            options: [
+                "Consumo moderado de café",
+                "Histórico familiar",
+                "Exercícios físicos regulares",
+                "Dieta vegetariana"
+            ],
+            correct: 1
+        },
+        {
+            question: "O autoexame das mamas deve ser feito:",
+            options: [
+                "Diariamente",
+                "Semanalmente",
+                "Mensalmente",
+                "Anualmente"
+            ],
+            correct: 2
+        },
+        {
+            question: "Qual é a idade recomendada para começar a fazer mamografia de rastreamento?",
+            options: [
+                "30 anos",
+                "40 anos",
+                "50 anos",
+                "60 anos"
+            ],
+            correct: 1
+        },
+        {
+            question: "Qual destes sinais pode indicar câncer de mama?",
+            options: [
+                "Nódulo ou caroço na mama",
+                "Dor de cabeça frequente",
+                "Tosse persistente",
+                "Manchas nas unhas"
+            ],
+            correct: 0
+        },
+        {
+            question: "Qual porcentagem de casos de câncer de mama é descoberta pelas próprias mulheres?",
+            options: [
+                "Cerca de 20%",
+                "Cerca de 65%",
+                "Cerca de 40%",
+                "Cerca de 90%"
+            ],
+            correct: 1
+        },
+        {
+            question: "Além da mamografia, qual outro exame pode ser usado para avaliar as mamas?",
+            options: [
+                "Ressonância magnética",
+                "Tomografia computadorizada",
+                "Raio-X dos pulmões",
+                "Eletrocardiograma"
+            ],
+            correct: 0
+        },
+        {
+            question: "Qual hábito de vida ajuda na prevenção do câncer de mama?",
+            options: [
+                "Consumo excessivo de álcool",
+                "Tabagismo",
+                "Sedentarismo",
+                "Prática regular de atividade física"
+            ],
+            correct: 3
+        }
+    ];
 
-    <script>
-        // Dados do quiz
-        const quizData = [
-            {
-                question: "O que é o Outubro Rosa?",
-                options: [
-                    "Campanha de conscientização sobre o câncer de mama",
-                    "Mês de prevenção do câncer de próstata",
-                    "Campanha de doação de sangue",
-                    "Mês de conscientização sobre saúde mental"
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual é a principal forma de detecção precoce do câncer de mama?",
-                options: [
-                    "Autoexame mensal",
-                    "Mamografia regular",
-                    "Ultrassom das mamas",
-                    "Exame de sangue"
-                ],
-                correct: 1
-            },
-            {
-                question: "Com que frequência mulheres acima de 40 anos devem fazer mamografia?",
-                options: [
-                    "A cada 6 meses",
-                    "A cada 1 ano",
-                    "A cada 2 anos",
-                    "A cada 5 anos"
-                ],
-                correct: 2
-            },
-            {
-                question: "Qual desses é um fator de risco para o câncer de mama?",
-                options: [
-                    "Consumo moderado de café",
-                    "Histórico familiar",
-                    "Exercícios físicos regulares",
-                    "Dieta vegetariana"
-                ],
-                correct: 1
-            },
-            {
-                question: "O autoexame das mamas deve ser feito:",
-                options: [
-                    "Diariamente",
-                    "Semanalmente",
-                    "Mensalmente",
-                    "Anualmente"
-                ],
-                correct: 2
-            },
-            {
-                question: "Qual é a idade recomendada para começar a fazer mamografia de rastreamento?",
-                options: [
-                    "30 anos",
-                    "40 anos",
-                    "50 anos",
-                    "60 anos"
-                ],
-                correct: 1
-            },
-            {
-                question: "Qual destes sinais pode indicar câncer de mama?",
-                options: [
-                    "Nódulo ou caroço na mama",
-                    "Dor de cabeça frequente",
-                    "Tosse persistente",
-                    "Manchas nas unhas"
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual porcentagem de casos de câncer de mama é descoberta pelas próprias mulheres?",
-                options: [
-                    "Cerca de 20%",
-                    "Cerca de 65%",
-                    "Cerca de 40%",
-                    "Cerca de 90%",
-                ],
-                correct: 3
-            },
-            {
-                question: "Além da mamografia, qual outro exame pode ser usado para avaliar as mamas?",
-                options: [
-                    "Ressonância magnética",
-                    "Tomografia computadorizada",
-                    "Raio-X dos pulmões",
-                    "Eletrocardiograma"
-                ],
-                correct: 0
-            },
-            {
-                question: "Qual hábito de vida ajuda na prevenção do câncer de mama?",
-                options: [
-                    "Consumo excessivo de álcool",
-                    "Tabagismo",
-                    "Sedentarismo",
-                    "Prática regular de atividade física",
-                ],
-                correct: 3
+    // Elementos DOM
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const quizScreen = document.getElementById('quizScreen');
+    const resultScreen = document.getElementById('resultScreen');
+    const startQuizBtn = document.getElementById('startQuiz');
+    const restartQuizBtn = document.getElementById('restartQuiz');
+    const homeButton = document.getElementById('homeButton');
+    const prevQuestionBtn = document.getElementById('prevQuestion');
+    const nextQuestionBtn = document.getElementById('nextQuestion');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const currentQuestionEl = document.getElementById('currentQuestion');
+    const currentScoreEl = document.getElementById('currentScore');
+    const scoreContainer = document.querySelector('.score-container'); // Elemento que contém a pontuação
+    const timeLeftEl = document.getElementById('timeLeft');
+    const quizProgress = document.getElementById('quizProgress');
+    const finalScoreEl = document.getElementById('finalScore');
+    const resultMessage = document.getElementById('resultMessage');
+    const prizeMessage = document.getElementById('prizeMessage');
+    const themeToggle = document.getElementById('themeToggle');
+    const qrcodeContainer = document.getElementById('qrcode');
+    const countdownContainer = document.getElementById('countdownContainer');
+    const countdownTimer = document.getElementById('countdownTimer');
+
+    // Variáveis do quiz
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let userAnswers = new Array(quizData.length).fill(null);
+    let timer;
+    let timeLeft = 60;
+    let countdown;
+    let countdownTime = 10;
+
+    // Inicialização
+    function initQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        userAnswers.fill(null);
+        updateProgress();
+        showQuestion();
+        startTimer();
+        
+        // ESCONDER pontuação durante o quiz
+        if (scoreContainer) {
+            scoreContainer.style.display = 'none';
+        }
+        if (currentScoreEl) {
+            currentScoreEl.textContent = '?';
+        }
+    }
+
+    // Mostrar pergunta atual
+    function showQuestion() {
+        const question = quizData[currentQuestionIndex];
+        questionText.textContent = question.question;
+        currentQuestionEl.textContent = currentQuestionIndex + 1;
+        
+        // Manter pontuação oculta durante o quiz
+        if (currentScoreEl) {
+            currentScoreEl.textContent = '?';
+        }
+
+        // Limpar opções anteriores
+        optionsContainer.innerHTML = '';
+
+        // Adicionar novas opções
+        question.options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'option';
+            if (userAnswers[currentQuestionIndex] === index) {
+                optionElement.classList.add('selected');
             }
-        ];
 
-        // Elementos DOM
-        const welcomeScreen = document.getElementById('welcomeScreen');
-        const quizScreen = document.getElementById('quizScreen');
-        const resultScreen = document.getElementById('resultScreen');
-        const startQuizBtn = document.getElementById('startQuiz');
-        const restartQuizBtn = document.getElementById('restartQuiz');
-        const homeButton = document.getElementById('homeButton');
-        const prevQuestionBtn = document.getElementById('prevQuestion');
-        const nextQuestionBtn = document.getElementById('nextQuestion');
-        const questionText = document.getElementById('questionText');
-        const optionsContainer = document.getElementById('optionsContainer');
-        const currentQuestionEl = document.getElementById('currentQuestion');
-        const currentScoreEl = document.getElementById('currentScore');
-        const timeLeftEl = document.getElementById('timeLeft');
-        const quizProgress = document.getElementById('quizProgress');
-        const finalScoreEl = document.getElementById('finalScore');
-        const resultMessage = document.getElementById('resultMessage');
-        const prizeMessage = document.getElementById('prizeMessage');
-        const themeToggle = document.getElementById('themeToggle');
-        const qrcodeContainer = document.getElementById('qrcode');
-        const countdownContainer = document.getElementById('countdownContainer');
-        const countdownTimer = document.getElementById('countdownTimer');
+            optionElement.innerHTML = `
+                <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                <div class="option-text">${option}</div>
+            `;
 
-        // Variáveis do quiz
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let userAnswers = new Array(quizData.length).fill(null);
-        let timer;
-        let timeLeft = 60;
-        let countdown;
-        let countdownTime = 10;
+            optionElement.addEventListener('click', () => selectOption(index));
+            optionsContainer.appendChild(optionElement);
+        });
 
-        // Inicialização
-        function initQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            userAnswers.fill(null);
-            updateProgress();
+        // Atualizar estado dos botões
+        prevQuestionBtn.disabled = currentQuestionIndex === 0;
+        nextQuestionBtn.textContent = currentQuestionIndex === quizData.length - 1 ? 'Finalizar' : 'Próxima';
+        nextQuestionBtn.innerHTML = currentQuestionIndex === quizData.length - 1 ?
+            'Finalizar <i class="bi bi-check-circle"></i>' :
+            'Próxima <i class="bi bi-arrow-right"></i>';
+    }
+
+    // CORREÇÃO PRINCIPAL: Selecionar uma opção - VERSÃO CORRIGIDA
+    function selectOption(optionIndex) {
+        // Salva a resposta anterior para verificar se precisa ajustar a pontuação
+        const previousAnswer = userAnswers[currentQuestionIndex];
+        const correctAnswer = quizData[currentQuestionIndex].correct;
+        
+        // Atualiza a resposta atual
+        userAnswers[currentQuestionIndex] = optionIndex;
+
+        // Atualizar visual das opções
+        const options = document.querySelectorAll('.option');
+        options.forEach((option, index) => {
+            option.classList.remove('selected');
+            if (index === optionIndex) {
+                option.classList.add('selected');
+            }
+        });
+
+        // LÓGICA DE PONTUAÇÃO CORRIGIDA:
+        
+        // Se a nova resposta está correta E a anterior estava errada ou não existia
+        if (optionIndex === correctAnswer && previousAnswer !== correctAnswer) {
+            score++;
+        }
+        // Se a nova resposta está errada E a anterior estava correta
+        else if (optionIndex !== correctAnswer && previousAnswer === correctAnswer) {
+            score--;
+        }
+        // Manter pontuação oculta durante o quiz
+        if (currentScoreEl) {
+            currentScoreEl.textContent = '?';
+        }
+    }
+
+    // Navegar para próxima pergunta
+    function nextQuestion() {
+        if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            resetTimer();
+            updateProgress(); // ADICIONADO: Atualizar barra de progresso
             showQuestion();
-            startTimer();
+        } else {
+            finishQuiz();
         }
+    }
 
-        // Mostrar pergunta atual
-        function showQuestion() {
-            const question = quizData[currentQuestionIndex];
-            questionText.textContent = question.question;
-            currentQuestionEl.textContent = currentQuestionIndex + 1;
-            currentScoreEl.textContent = score;
-            
-            // Limpar opções anteriores
-            optionsContainer.innerHTML = '';
-            
-            // Adicionar novas opções
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[currentQuestionIndex] === index) {
-                    optionElement.classList.add('selected');
-                }
-                
-                optionElement.innerHTML = `
-                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
-                    <div class="option-text">${option}</div>
-                `;
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Atualizar estado dos botões
-            prevQuestionBtn.disabled = currentQuestionIndex === 0;
-            nextQuestionBtn.textContent = currentQuestionIndex === quizData.length - 1 ? 'Finalizar' : 'Próxima';
-            nextQuestionBtn.innerHTML = currentQuestionIndex === quizData.length - 1 ? 
-                'Finalizar <i class="bi bi-check-circle"></i>' : 
-                'Próxima <i class="bi bi-arrow-right"></i>';
+    // Navegar para pergunta anterior
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            resetTimer();
+            updateProgress(); // ADICIONADO: Atualizar barra de progresso
+            showQuestion();
         }
+    }
 
-        // Selecionar uma opção
-        function selectOption(optionIndex) {
-            userAnswers[currentQuestionIndex] = optionIndex;
-            
-            // Atualizar visual das opções
-            const options = document.querySelectorAll('.option');
-            options.forEach((option, index) => {
-                option.classList.remove('selected');
-                if (index === optionIndex) {
-                    option.classList.add('selected');
-                }
-            });
-            
-            // Verificar se a resposta está correta
-            if (optionIndex === quizData[currentQuestionIndex].correct) {
-                // Só adiciona pontos se ainda não tiver respondido esta pergunta
-                if (userAnswers[currentQuestionIndex] !== quizData[currentQuestionIndex].correct) {
-                    score++;
-                    currentScoreEl.textContent = score;
-                }
-            } else {
-                // Se mudou de uma resposta correta para incorreta, remove ponto
-                if (userAnswers[currentQuestionIndex] === quizData[currentQuestionIndex].correct) {
-                    score--;
-                    currentScoreEl.textContent = score;
-                }
-            }
-        }
+    // Temporizador
+    function startTimer() {
+        clearInterval(timer);
+        timeLeft = 60;
+        timeLeftEl.textContent = timeLeft;
 
-        // Navegar para próxima pergunta
-        function nextQuestion() {
-            if (currentQuestionIndex < quizData.length - 1) {
-                currentQuestionIndex++;
-                resetTimer();
-                showQuestion();
-            } else {
-                finishQuiz();
-            }
-        }
-
-        // Navegar para pergunta anterior
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                resetTimer();
-                showQuestion();
-            }
-        }
-
-        // Temporizador
-        function startTimer() {
-            clearInterval(timer);
-            timeLeft = 60;
+        timer = setInterval(() => {
+            timeLeft--;
             timeLeftEl.textContent = timeLeft;
-            
-            timer = setInterval(() => {
-                timeLeft--;
-                timeLeftEl.textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    // Se o tempo acabar, avança automaticamente para a próxima pergunta
-                    if (currentQuestionIndex < quizData.length - 1) {
-                        currentQuestionIndex++;
-                        resetTimer();
-                        showQuestion();
-                    } else {
-                        finishQuiz();
-                    }
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                // Se o tempo acabar, avança automaticamente para a próxima pergunta
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    resetTimer();
+                    showQuestion();
+                } else {
+                    finishQuiz();
                 }
-            }, 1000);
-        }
-
-        function resetTimer() {
-            clearInterval(timer);
-            startTimer();
-        }
-
-        // Atualizar barra de progresso
-        function updateProgress() {
-            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
-            quizProgress.style.width = `${progress}%`;
-        }
-
-        // Finalizar quiz
-        function finishQuiz() {
-            clearInterval(timer);
-            quizScreen.style.display = 'none';
-            resultScreen.style.display = 'block';
-            
-            // Calcular pontuação final
-            let finalScore = 0;
-            userAnswers.forEach((answer, index) => {
-                if (answer === quizData[index].correct) {
-                    finalScore++;
-                }
-            });
-            
-            finalScoreEl.textContent = `${finalScore}/${quizData.length}`;
-            
-            // Mensagem baseada na pontuação
-            if (finalScore >= 8) {
-                resultMessage.textContent = "Excelente! Você demonstrou ótimo conhecimento sobre o Outubro Rosa e prevenção do câncer de mama.";
-            } else if (finalScore >= 5) {
-                resultMessage.textContent = "Muito bom! Você tem um bom conhecimento, mas ainda pode aprender mais sobre prevenção.";
-            } else {
-                resultMessage.textContent = "Continue aprendendo! A conscientização é o primeiro passo para a prevenção.";
             }
-            
-            // Mostrar mensagem de brinde se necessário
-            if (finalScore >= 5) {
-                prizeMessage.style.display = 'block';
+        }, 1000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        startTimer();
+    }
+
+    // Atualizar barra de progresso
+    function updateProgress() {
+        const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+        quizProgress.style.width = `${progress}%`;
+    }
+
+    // Finalizar quiz
+    function finishQuiz() {
+        clearInterval(timer);
+        quizScreen.style.display = 'none';
+        resultScreen.style.display = 'block';
+
+        // MOSTRAR pontuação apenas no final
+        if (scoreContainer) {
+            scoreContainer.style.display = 'flex'; // ou 'block' dependendo do seu CSS
+        }
+
+        // Calcular pontuação final CORRETAMENTE
+        let finalScore = 0;
+        userAnswers.forEach((answer, index) => {
+            if (answer === quizData[index].correct) {
+                finalScore++;
             }
-            
-            // Gerar QR Code
-            generateQRCode();
-            
-            // Iniciar contagem regressiva para voltar à página principal
-            startCountdown();
+        });
+
+        finalScoreEl.textContent = `${finalScore}/${quizData.length}`;
+
+        // Mensagem baseada na pontuação
+        if (finalScore === quizData.length) {
+            resultMessage.textContent = "PERFEITO! 🎉 Você acertou todas as questões! Excelente conhecimento sobre prevenção do câncer de mama!";
+        } else if (finalScore >= 8) {
+            resultMessage.textContent = "Excelente! Você demonstrou ótimo conhecimento sobre o Outubro Rosa e prevenção do câncer de mama.";
+        } else if (finalScore >= 5) {
+            resultMessage.textContent = "Muito bom! Você tem um bom conhecimento, mas ainda pode aprender mais sobre prevenção.";
+        } else {
+            resultMessage.textContent = "Continue aprendendo! A conscientização é o primeiro passo para a prevenção.";
+        }
+
+        // Mostrar mensagem de brinde se necessário
+        if (finalScore >= 5) {
+            prizeMessage.style.display = 'block';
         }
 
         // Gerar QR Code
-        function generateQRCode() {
-            qrcodeContainer.innerHTML = '';
-            const quizUrl = window.location.href;
-            const qrSize = Math.min(200, window.innerWidth * 0.6);
-            
-            QRCode.toCanvas(qrcodeContainer, quizUrl, {
-                width: qrSize,
-                height: qrSize,
-                colorDark: "#e91e63",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            }, function(error) {
-                if (error) console.error(error);
-            });
-        }
+        generateQRCode();
 
-        // Contagem regressiva para voltar à página principal
-        function startCountdown() {
-            countdownContainer.style.display = 'block';
-            countdownTime = 10;
-            countdownTimer.textContent = `${countdownTime} segundos`;
-            
-            countdown = setInterval(() => {
-                countdownTime--;
-                countdownTimer.textContent = `${countdownTime} segundo${countdownTime !== 1 ? 's' : ''}`;
-                
-                if (countdownTime <= 0) {
-                    clearInterval(countdown);
-                    // Redirecionar para a página principal
-                    window.location.href = 'index.html';
-                }
-            }, 1000);
-        }
+        // Iniciar contagem regressiva para voltar à página principal
+        startCountdown();
+    }
 
-        // Parar a contagem regressiva se o usuário interagir
-        function stopCountdown() {
-            clearInterval(countdown);
-            countdownContainer.style.display = 'none';
-        }
+    // Gerar QR Code
+    function generateQRCode() {
+        qrcodeContainer.innerHTML = '';
+        const quizUrl = window.location.href;
+        const qrSize = Math.min(200, window.innerWidth * 0.6);
 
-        // Alternar tema claro/escuro
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-            const icon = themeToggle.querySelector('i');
-            if (document.body.classList.contains('dark')) {
-                icon.classList.remove('bi-moon-stars');
-                icon.classList.add('bi-brightness-high');
-            } else {
-                icon.classList.remove('bi-brightness-high');
-                icon.classList.add('bi-moon-stars');
-            }
-            
-            // Salvar preferência
-            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-        }
-
-        // Carregar tema salvo
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark');
-                themeToggle.querySelector('i').classList.remove('bi-moon-stars');
-                themeToggle.querySelector('i').classList.add('bi-brightness-high');
-            }
-        }
-
-        // Event Listeners
-        startQuizBtn.addEventListener('click', () => {
-            welcomeScreen.style.display = 'none';
-            quizScreen.style.display = 'block';
-            initQuiz();
+        QRCode.toCanvas(qrcodeContainer, quizUrl, {
+            width: qrSize,
+            height: qrSize,
+            colorDark: "#e91e63",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        }, function (error) {
+            if (error) console.error(error);
         });
+    }
 
-        restartQuizBtn.addEventListener('click', () => {
-            resultScreen.style.display = 'none';
-            welcomeScreen.style.display = 'block';
-            stopCountdown();
-        });
+    // Contagem regressiva para voltar à página principal
+    function startCountdown() {
+        countdownContainer.style.display = 'block';
+        countdownTime = 10;
+        countdownTimer.textContent = `${countdownTime} segundos`;
 
-        homeButton.addEventListener('click', stopCountdown);
+        countdown = setInterval(() => {
+            countdownTime--;
+            countdownTimer.textContent = `${countdownTime} segundo${countdownTime !== 1 ? 's' : ''}`;
 
-        prevQuestionBtn.addEventListener('click', prevQuestion);
-        nextQuestionBtn.addEventListener('click', nextQuestion);
-        themeToggle.addEventListener('click', toggleTheme);
+            if (countdownTime <= 0) {
+                clearInterval(countdown);
+                // Redirecionar para a página principal
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+    }
 
-        // Inicializar
-        loadTheme();
-    </script>
+    // Parar a contagem regressiva se o usuário interagir
+    function stopCountdown() {
+        clearInterval(countdown);
+        countdownContainer.style.display = 'none';
+    }
+
+    // Alternar tema claro/escuro
+    function toggleTheme() {
+        document.body.classList.toggle('dark');
+        const icon = themeToggle.querySelector('i');
+        if (document.body.classList.contains('dark')) {
+            icon.classList.remove('bi-moon-stars');
+            icon.classList.add('bi-brightness-high');
+        } else {
+            icon.classList.remove('bi-brightness-high');
+            icon.classList.add('bi-moon-stars');
+        }
+
+        // Salvar preferência
+        localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Carregar tema salvo
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            themeToggle.querySelector('i').classList.remove('bi-moon-stars');
+            themeToggle.querySelector('i').classList.add('bi-brightness-high');
+        }
+    }
+
+    // Event Listeners
+    startQuizBtn.addEventListener('click', () => {
+        welcomeScreen.style.display = 'none';
+        quizScreen.style.display = 'block';
+        initQuiz();
+    });
+
+    restartQuizBtn.addEventListener('click', () => {
+        resultScreen.style.display = 'none';
+        welcomeScreen.style.display = 'block';
+        stopCountdown();
+        
+        // Mostrar pontuação novamente na tela inicial (se aplicável)
+        if (scoreContainer) {
+            scoreContainer.style.display = 'flex';
+        }
+    });
+
+    homeButton.addEventListener('click', stopCountdown);
+
+    prevQuestionBtn.addEventListener('click', prevQuestion);
+    nextQuestionBtn.addEventListener('click', nextQuestion);
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Inicializar
+    loadTheme();
+</script>
 </body>
+
 </html>
