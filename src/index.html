@@ -513,25 +513,14 @@
     </a>
   </div>
 
-  <script>
-    const openDonate = document.getElementById('openDonate');
-    const ctaDoar = document.getElementById('ctaDoar');
-    const donateModal = document.getElementById('donateModal');
-  const closeDonate = document.getElementById('closeModal');
-    const toggle = document.getElementById('themeToggle');
-    const body = document.body;
-
-  // Abrir/fechar modal de doação com transições suaves (usa classe .show)
-  openDonate.onclick = () => { donateModal.classList.add('show'); document.body.style.overflow = 'hidden'; };
-  ctaDoar.onclick = () => { donateModal.classList.add('show'); document.body.style.overflow = 'hidden'; };
-  closeDonate.onclick = () => { donateModal.classList.remove('show'); document.body.style.overflow = ''; };
+  <script src="js/main.js">
 
     document.getElementById('donateForm').addEventListener('submit', e => {
       e.preventDefault();
       const val = document.querySelector('input[name="amount"]:checked');
       if (!val) { alert("Escolha um valor."); return }
       alert("Obrigado por doar R$" + val.value + "!");
-      donateModal.style.display = "none";
+      hideDonateModal();
     });
 
     document.getElementById('contactForm').addEventListener('submit', e => {
