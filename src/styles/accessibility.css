@@ -1,0 +1,232 @@
+/* ========================== ACESSIBILIDADE ========================== */
+
+/* Esconde visualmente, mas mantém para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip Links */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    z-index: 9999;
+    padding: var(--space-md);
+    background: var(--pink-700);
+    color: white;
+    text-decoration: none;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--pink-400);
+    outline-offset: 2px;
+}
+
+/* Estados de Foco Aprimorados */
+:focus-visible {
+    outline: 3px solid var(--pink-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.2);
+}
+
+/* Remove outline padrão para elementos não-keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Contraste de Texto */
+.high-contrast {
+    color: var(--dark);
+    background: white;
+}
+
+.high-contrast-light {
+    color: white;
+    background: var(--dark);
+}
+
+/* Indicadores de Foco para Controles Interativos */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--pink-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.2);
+}
+
+/* Melhor legibilidade */
+.readable {
+    max-width: 65ch;
+    margin-inline: auto;
+    line-height: 1.6;
+}
+
+/* Indicadores de Estado */
+[aria-expanded="true"] {
+    background-color: var(--rose-50);
+}
+
+[aria-current="page"] {
+    font-weight: bold;
+    color: var(--pink-700);
+}
+
+[aria-disabled="true"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Melhor contraste para texto sobre fundos claros/escuros */
+.text-on-dark {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.text-on-light {
+    color: var(--dark);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Indicadores de Loading para Usuários de Leitores de Tela */
+[aria-busy="true"]::after {
+    content: "Carregando...";
+    display: block;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Tooltips Acessíveis */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--dark);
+    color: white;
+    font-size: var(--small-size);
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 1000;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:focus::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Melhorias de Contraste */
+.text-contrast-high {
+    color: var(--dark);
+}
+
+.text-contrast-medium {
+    color: var(--muted);
+}
+
+/* Indicadores de Erro Acessíveis */
+.error-message {
+    color: #d32f2f;
+    font-weight: bold;
+    padding: var(--space-xs) 0;
+}
+
+[aria-invalid="true"] {
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 1px #d32f2f;
+}
+
+/* Botões Acessíveis */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: 4px;
+    background: var(--pink-700);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background: var(--pink-900);
+}
+
+.button:focus-visible {
+    outline: 3px solid var(--pink-400);
+    outline-offset: 2px;
+}
+
+/* Inputs Acessíveis */
+.input {
+    min-height: 44px;
+    padding: var(--space-sm);
+    border: 2px solid var(--muted);
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: var(--body-size);
+    transition: border-color 0.2s;
+}
+
+.input:hover {
+    border-color: var(--pink-400);
+}
+
+.input:focus {
+    border-color: var(--pink-700);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+}
+
+/* Links Acessíveis */
+.link {
+    color: var(--pink-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: var(--pink-900);
+}
+
+.link:focus-visible {
+    outline: 3px solid var(--pink-400);
+    outline-offset: 2px;
+    border-radius: 2px;
+}

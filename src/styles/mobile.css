@@ -1,0 +1,152 @@
+/* ========================== MENU MOBILE ========================== */
+.menu-mobile {
+    display: none;
+    border: none;
+    background: transparent;
+    padding: var(--space-xs);
+    font-size: var(--font-xl);
+    color: var(--text);
+    cursor: pointer;
+    z-index: 51;
+}
+
+@media (max-width: 768px) {
+    /* Header Mobile */
+    .header-inner {
+        padding: var(--space-xs) 0;
+    }
+
+    .brand h1 {
+        font-size: var(--font-lg);
+    }
+
+    .brand small {
+        font-size: var(--font-xs);
+    }
+
+    /* Menu Mobile */
+    .menu-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav.main-nav {
+        position: fixed;
+        inset: var(--header-height) 0 0 0;
+        background: var(--bg);
+        padding: var(--space-lg);
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-md);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 2px 0 8px var(--shadow);
+        z-index: 50;
+        overflow-y: auto;
+    }
+
+    nav.main-nav.active {
+        transform: translateX(0);
+    }
+
+    nav.main-nav a {
+        padding: var(--space-sm);
+        text-align: left;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+    }
+
+    nav.main-nav a:hover,
+    nav.main-nav a:focus {
+        background-color: var(--rose-50);
+    }
+
+    nav.main-nav a::after {
+        display: none;
+    }
+
+    .cta-donate {
+        margin-top: var(--space-md);
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Tipografia Responsiva */
+    h1 {
+        font-size: var(--font-3xl);
+        line-height: 1.2;
+    }
+
+    h2 {
+        font-size: var(--font-2xl);
+        line-height: 1.3;
+    }
+
+    h3 {
+        font-size: var(--font-xl);
+        line-height: 1.4;
+    }
+
+    p {
+        font-size: var(--font-base);
+        line-height: 1.6;
+    }
+
+    /* Layout Responsivo */
+    .container {
+        width: calc(100% - var(--space-lg));
+        padding: 0 var(--space-sm);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    /* Componentes Responsivos */
+    .card {
+        padding: var(--space-md);
+        border-radius: 12px;
+    }
+
+    .btn {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-sm);
+    }
+
+    .modal-content {
+        width: calc(100% - var(--space-lg));
+        margin: var(--space-md);
+        padding: var(--space-md);
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+    :root {
+        --content-spacing: var(--space-lg);
+    }
+
+    .container {
+        width: calc(100% - var(--space-md));
+        padding: 0 var(--space-xs);
+    }
+
+    .hero {
+        padding: var(--space-xl) 0;
+    }
+
+    .grid {
+        gap: var(--space-md);
+    }
+
+    .card {
+        padding: var(--space-sm);
+    }
+}

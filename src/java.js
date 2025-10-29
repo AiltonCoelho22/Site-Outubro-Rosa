@@ -8,12 +8,6 @@ document.querySelectorAll('nav a').forEach(link => {
   });
 });
 
-// Detecta tema do sistema (claro/escuro)
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-if (prefersDark) {
-  document.body.classList.add('dark');
-}
-
 // Rotating phrases under hero
 ;(function(){
   const phrases = Array.from(document.querySelectorAll('.rotating-phrases .phrase'));
@@ -45,168 +39,111 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Theme toggle aria handling
-const toggle = document.getElementById('themeToggle');
-if (toggle) {
-  toggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    const pressed = document.body.classList.contains('dark');
-    toggle.setAttribute('aria-pressed', String(pressed));
-    toggle.textContent = pressed ? '☀️' : '🌙';
-    localStorage.setItem('theme', pressed ? 'dark' : 'light');
-  });
-}
+// Menu Mobile com animações e gestos de toque
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+const menuOverlay = document.getElementById('menuOverlay');
+let touchStartX = 0;
+let touchEndX = 0;
 
-// Simple tab handling for autoexame
-(function(){
-  const tabs = Array.from(document.querySelectorAll('.tab'));
-  if (!tabs.length) return;
-  const panels = (id)=> document.getElementById(id);
-
-  const activate = (tab)=>{
-    tabs.forEach(t=> t.setAttribute('aria-selected','false'));
-    tab.setAttribute('aria-selected','true');
-    tabs.forEach(t=> panels(t.getAttribute('aria-controls')).hidden = true);
-    panels(tab.getAttribute('aria-controls')).hidden = false;
-  }
-
-  tabs.forEach(t=>{
-    t.addEventListener('click', ()=> activate(t));
-    t.addEventListener('keydown', (e)=>{
-      const idx = tabs.indexOf(t);
-      if (e.key === 'ArrowRight') tabs[(idx+1)%tabs.length].focus();
-      if (e.key === 'ArrowLeft') tabs[(idx-1+tabs.length)%tabs.length].focus();
-    });
-  });
-})();
-
-// Animação ao rolar
-function handleScrollAnimations() {
-  const elements = document.querySelectorAll('.fade-in');
-  
-  elements.forEach(element => {
-    const position = element.getBoundingClientRect().top;
-    const screenHeight = window.innerHeight;
-    
-    if(position < screenHeight * 0.8) {
-      element.classList.add('visible');
-    }
-  });
-}
-
-// Adicionar classe fade-in aos elementos
-document.querySelectorAll('section').forEach(section => {
-  section.classList.add('fade-in');
-});
-
-// Listener para scroll
-window.addEventListener('scroll', handleScrollAnimations);
-
-// Ativar primeira animação
-handleScrollAnimations();
-
-// Rotação melhorada das quotes
-function rotateQuotes() {
-  const quotes = document.querySelectorAll('.quote');
-  let currentIndex = 0;
-  
-  function showNextQuote() {
-    quotes.forEach(quote => quote.classList.remove('active'));
-    quotes[currentIndex].classList.add('active');
-    currentIndex = (currentIndex + 1) % quotes.length;
-  }
-  
-  showNextQuote(); // Mostrar primeira quote
-  setInterval(showNextQuote, 5000);
-}
-
-document.addEventListener('DOMContentLoaded', rotateQuotes);
-
-// Carrossel de histórias
-function initStoriesCarousel() {
-  const slides = document.querySelectorAll('.story-slide');
-  let currentSlide = 0;
-
-  function showSlide(index) {
-    slides.forEach(slide => {
-      slide.classList.remove('active');
-    });
-    slides[index].classList.add('active');
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  showSlide(0);
-  setInterval(nextSlide, 5000);
-}
-
-// Expandir histórias
-document.querySelectorAll('.btn-read-more').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const storyFull = btn.previousElementSibling;
-    storyFull.hidden = !storyFull.hidden;
-    btn.textContent = storyFull.hidden ? 'Ler Mais' : 'Ler Menos';
-  });
-});
-
-// Inicializar carrossel quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', initStoriesCarousel);
-
-// Conteúdo da história completa
-const storiesContent = {
-  tathiana: `
-    <article class="story-full">
-      <h2>História de Tathiana França</h2>
-      
-      <div class="story-chapter">
-        <h3><i class="bi bi-bookmark-heart"></i> O Diagnóstico</h3>
-        <p>Trabalhava em uma pizzaria no ano de 2017, estava conversando com um funcionário e mexendo no cordão que do nada, caiu. Quando fui pegar senti um caroço no peito. Passei a mão novamente e me desesperei porque nunca tinha sentido ele antes. No dia seguinte procurei um clínico geral que me passou uma ultrassonografia da mama. Fiz a ultra e a médica me recomendou procurar um mastologista. Aí começou minha correria contra o tempo. Mamografia, biópsia e o resultado. Quando o médico falou "Tathi, você está com câncer de mama", eu me desesperei, gritei, chorei, porque infelizmente a gente não lembra de quem se curou, só lembra do artista ou do conhecido que faleceu!</p>
-      </div>
-
-      <div class="story-chapter">
-        <h3><i class="bi bi-heart-pulse"></i> O Tratamento</h3>
-        <p>O câncer que eu tive era do tipo triplo negativo, o mais agressivo. Passei por oito sessões de quimioterapia sendo, quatro vermelhas e quatro brancas. Meu cabelo caiu 15 dias após a primeira sessão e a sobrancelha também. Em maio de 2018 passei pela operação mastectomia total. Esse foi e continua sendo o momento mais difícil, eu me olhar no espelho sem uma mama. Dou graças a Deus também porque estou viva e a cicatriz é a marca da minha vitória!</p>
-      </div>
-
-      <div class="story-chapter">
-        <h3><i class="bi bi-people-fill"></i> Apoio Familiar</h3>
-        <p>Minha família e meus filhos foram meu porto seguro em todo o tratamento, sem o apoio deles seria bem mais difícil. E Deus me sustentou todos os dias, porque sem Ele nada somos.</p>
-      </div>
-
-      <div class="story-chapter highlight">
-        <h3><i class="bi bi-stars"></i> Nova Missão</h3>
-        <p>E depois de 3 anos, infelizmente passei por tudo novamente. A doença não voltou em mim, mas foi diagnosticada na minha irmã. Acompanhei ela em todas as sessões de quimioterapia. Estive juntinho no dia que ela operou, fazendo também a mastectomia total. Hoje estamos curadas!</p>
-      </div>
-
-      <blockquote class="story-message">
-        "Para aquelas que pegaram o diagnóstico recente ou estão passando pelo que passei, não desistam, lutem! Cabelo nasce, sobrancelha também: o mais importante que isso tudo é a nossa vida, é a nossa cura!"
-      </blockquote>
-    </article>
-  `
+// Função para abrir o menu
+const openMenu = () => {
+  mainNav.classList.add('active');
+  menuOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  menuToggle.setAttribute('aria-expanded', 'true');
+  menuToggle.querySelector('i').classList.remove('bi-list');
+  menuToggle.querySelector('i').classList.add('bi-x-lg');
 };
 
-// Event listener para abrir o modal
-document.querySelectorAll('.btn-expand').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const storyId = btn.dataset.story;
-    if (storiesContent[storyId]) {
-      const modal = document.getElementById('storyModal');
-      const modalBody = modal.querySelector('.modal-body');
-      modalBody.innerHTML = storiesContent[storyId];
-      modal.hidden = false;
-      setTimeout(() => modal.classList.add('active'), 10);
+// Função para fechar o menu
+const closeMenu = () => {
+  mainNav.classList.remove('active');
+  menuOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuToggle.querySelector('i').classList.add('bi-list');
+  menuToggle.querySelector('i').classList.remove('bi-x-lg');
+};
+
+// Gestão do menu mobile
+if (menuToggle && mainNav) {
+  // Click no botão do menu
+  menuToggle.addEventListener('click', () => {
+    if (mainNav.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
     }
   });
-});
 
-// cole no Console do DevTools estando na página (funciona melhor se servir via Live Server)
-['./img/jaqueline.jpg','./img/jussara.jpg','./img/tathiana-franca.jpeg'].forEach(src=>{
-  fetch(src).then(r=>{
-    console.log(src, r.status, r.ok);
-  }).catch(e=>{
-    console.error('erro fetch', src, e);
+  // Eventos de toque para o menu
+  mainNav.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
   });
+
+  mainNav.addEventListener('touchmove', (e) => {
+    touchEndX = e.touches[0].clientX;
+  });
+
+  mainNav.addEventListener('touchend', () => {
+    const swipeDistance = touchStartX - touchEndX;
+    if (swipeDistance > 50) { // Deslize para a esquerda
+      closeMenu();
+    }
+  });
+
+  // Fechar menu ao clicar no overlay
+  menuOverlay.addEventListener('click', closeMenu);
+
+  // Fechar menu com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+
+  // Fechar menu ao clicar em links (em telas pequenas)
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        closeMenu();
+      }
+    });
+  });
+}
+
+// Theme Toggle System
+const themeToggle = document.getElementById('themeToggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function setTheme(isDark) {
+  document.documentElement.classList.toggle('dark-theme', isDark);
+  localStorage.setItem('darkTheme', isDark);
+  
+  // Update button icon
+  const icon = themeToggle.querySelector('i');
+  icon.classList.remove('bi-sun', 'bi-moon-stars');
+  icon.classList.add(isDark ? 'bi-sun' : 'bi-moon-stars');
+}
+
+// Check for saved theme preference or use system preference
+const savedTheme = localStorage.getItem('darkTheme');
+if (savedTheme !== null) {
+  setTheme(savedTheme === 'true');
+} else {
+  setTheme(prefersDark.matches);
+}
+
+// Toggle theme on button click
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark-theme');
+    setTheme(!isDark);
+  });
+}
+
+// Update theme if system preference changes
+prefersDark.addEventListener('change', (e) => {
+  setTheme(e.matches);
 });
