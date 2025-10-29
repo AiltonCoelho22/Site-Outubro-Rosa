@@ -224,6 +224,7 @@
             flex: 1;
             justify-content: center;
             min-height: 50px;
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -245,6 +246,17 @@
 
         .btn-outline:hover {
             background: rgba(233, 30, 99, 0.1);
+        }
+
+        .btn-home {
+            background: linear-gradient(45deg, var(--purple-600), var(--pink-900));
+            color: white;
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(156, 39, 176, 0.4);
         }
 
         .btn:disabled {
@@ -393,6 +405,18 @@
             background: rgba(233, 30, 99, 0.1);
         }
 
+        .result-actions {
+            display: flex;
+            gap: clamp(10px, 3vw, 15px);
+            margin-top: clamp(20px, 4vw, 25px);
+            flex-wrap: wrap;
+        }
+
+        .result-actions .btn {
+            flex: 1;
+            min-width: 140px;
+        }
+
         /* Melhorias para telas muito pequenas (telefones) */
         @media (max-width: 480px) {
             .timer-container {
@@ -425,6 +449,14 @@
             
             .rules li {
                 font-size: var(--font-sm);
+            }
+            
+            .result-actions {
+                flex-direction: column;
+            }
+            
+            .result-actions .btn {
+                min-width: 100%;
             }
         }
 
@@ -529,6 +561,32 @@
                 font-size: 16px;
             }
         }
+
+        /* Contador automático para voltar à página principal */
+        .countdown-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--rose-50);
+            border-radius: 12px;
+            border-left: 4px solid var(--pink-700);
+        }
+
+        .countdown-text {
+            font-size: var(--font-base);
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .countdown-timer {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pink-700);
+            text-align: center;
+        }
+
+        body.dark .countdown-container {
+            background: rgba(255, 121, 168, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -549,6 +607,7 @@
                     <li>60 segundos para responder cada pergunta</li>
                     <li>Acertando 5 ou mais, você ganha um prêmio!</li>
                     <li>No final, gere um QR Code para compartilhar</li>
+                    <li>Volte automaticamente para a página principal após o quiz</li>
                 </ul>
             </div>
             
@@ -617,10 +676,20 @@
                 <div class="qr-title">Compartilhe este quiz:</div>
                 <div id="qrcode"></div>
             </div>
+
+            <div class="countdown-container" id="countdownContainer" style="display: none;">
+                <div class="countdown-text">Voltando automaticamente para a página principal em:</div>
+                <div class="countdown-timer" id="countdownTimer">10 segundos</div>
+            </div>
             
-            <button class="btn btn-primary" id="restartQuiz">
-                <i class="bi bi-arrow-repeat"></i> Jogar Novamente
-            </button>
+            <div class="result-actions">
+                <button class="btn btn-primary" id="restartQuiz">
+                    <i class="bi bi-arrow-repeat"></i> Jogar Novamente
+                </button>
+                <a href="index.html" class="btn btn-home" id="homeButton">
+                    <i class="bi bi-house"></i> Voltar ao Início
+                </a>
+            </div>
         </div>
     </div>
 
@@ -735,6 +804,7 @@
         const resultScreen = document.getElementById('resultScreen');
         const startQuizBtn = document.getElementById('startQuiz');
         const restartQuizBtn = document.getElementById('restartQuiz');
+        const homeButton = document.getElementById('homeButton');
         const prevQuestionBtn = document.getElementById('prevQuestion');
         const nextQuestionBtn = document.getElementById('nextQuestion');
         const questionText = document.getElementById('questionText');
@@ -748,6 +818,8 @@
         const prizeMessage = document.getElementById('prizeMessage');
         const themeToggle = document.getElementById('themeToggle');
         const qrcodeContainer = document.getElementById('qrcode');
+        const countdownContainer = document.getElementById('countdownContainer');
+        const countdownTimer = document.getElementById('countdownTimer');
 
         // Variáveis do quiz
         let currentQuestionIndex = 0;
@@ -755,6 +827,8 @@
         let userAnswers = new Array(quizData.length).fill(null);
         let timer;
         let timeLeft = 60;
+        let countdown;
+        let countdownTime = 10;
 
         // Inicialização
         function initQuiz() {
@@ -917,6 +991,9 @@
             
             // Gerar QR Code
             generateQRCode();
+            
+            // Iniciar contagem regressiva para voltar à página principal
+            startCountdown();
         }
 
         // Gerar QR Code
@@ -934,6 +1011,30 @@
             }, function(error) {
                 if (error) console.error(error);
             });
+        }
+
+        // Contagem regressiva para voltar à página principal
+        function startCountdown() {
+            countdownContainer.style.display = 'block';
+            countdownTime = 10;
+            countdownTimer.textContent = `${countdownTime} segundos`;
+            
+            countdown = setInterval(() => {
+                countdownTime--;
+                countdownTimer.textContent = `${countdownTime} segundo${countdownTime !== 1 ? 's' : ''}`;
+                
+                if (countdownTime <= 0) {
+                    clearInterval(countdown);
+                    // Redirecionar para a página principal
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+        }
+
+        // Parar a contagem regressiva se o usuário interagir
+        function stopCountdown() {
+            clearInterval(countdown);
+            countdownContainer.style.display = 'none';
         }
 
         // Alternar tema claro/escuro
@@ -972,7 +1073,10 @@
         restartQuizBtn.addEventListener('click', () => {
             resultScreen.style.display = 'none';
             welcomeScreen.style.display = 'block';
+            stopCountdown();
         });
+
+        homeButton.addEventListener('click', stopCountdown);
 
         prevQuestionBtn.addEventListener('click', prevQuestion);
         nextQuestionBtn.addEventListener('click', nextQuestion);
