@@ -44,7 +44,7 @@
 
     /* Tema escuro */
     body.dark .main-nav {
-        background: rgba(17, 19, 24, 0.85);
+        background: rgb(17, 19, 24);
         box-shadow: -4px 0 25px rgba(0, 0, 0, 0.3);
     }
 
@@ -141,8 +141,8 @@
     }
 
     .menu-toggle:hover {
-        background: var(--pink-700);
-        color: white;
+        background:transparent;
+        color: var(--pink-700);
         transform: scale(1.05);
     }
 

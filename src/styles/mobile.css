@@ -7,7 +7,7 @@
     font-size: var(--font-xl);
     color: var(--text);
     cursor: pointer;
-    z-index: 51;
+    z-index: 50;
 }
 
 @media (max-width: 768px) {
