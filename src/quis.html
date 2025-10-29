@@ -599,14 +599,14 @@
         <!-- Tela de Boas-Vindas -->
         <div class="welcome-screen" id="welcomeScreen">
             <h1 class="welcome-title">Quiz Outubro Rosa</h1>
-            <p class="welcome-text">Teste seus conhecimentos sobre prevenção do câncer de mama e concorra a prêmios!</p>
+            <p class="welcome-text">Teste seus conhecimentos sobre prevenção do câncer de mama e concorra a brindes!</p>
             
             <div class="rules">
                 <h3>Como funciona:</h3>
                 <ul>
                     <li>10 perguntas sobre Outubro Rosa e prevenção</li>
                     <li>60 segundos para responder cada pergunta</li>
-                    <li>Acertando 5 ou mais, você ganha um prêmio!</li>
+                    <li>Acertando 5 ou mais, você ganha um brinde!</li>
                     <li>No final, gere um QR Code para compartilhar</li>
                     <li>Volte automaticamente para a página principal após o quiz</li>
                 </ul>
@@ -670,7 +670,7 @@
             </div>
             
             <div id="prizeMessage" class="prize-message" style="display: none;">
-                <i class="bi bi-gift"></i> Parabéns! Você ganhou um prêmio!
+                <i class="bi bi-gift"></i> Parabéns! Você ganhou um brinde!
             </div>
             
             <div class="qr-container">
@@ -730,12 +730,12 @@
             {
                 question: "Qual desses é um fator de risco para o câncer de mama?",
                 options: [
-                    "Histórico familiar",
                     "Consumo moderado de café",
+                    "Histórico familiar",
                     "Exercícios físicos regulares",
                     "Dieta vegetariana"
                 ],
-                correct: 0
+                correct: 1
             },
             {
                 question: "O autoexame das mamas deve ser feito:",
@@ -771,11 +771,11 @@
                 question: "Qual porcentagem de casos de câncer de mama é descoberta pelas próprias mulheres?",
                 options: [
                     "Cerca de 20%",
-                    "Cerca de 40%",
                     "Cerca de 65%",
-                    "Cerca de 90%"
+                    "Cerca de 40%",
+                    "Cerca de 90%",
                 ],
-                correct: 2
+                correct: 3
             },
             {
                 question: "Além da mamografia, qual outro exame pode ser usado para avaliar as mamas?",
@@ -790,12 +790,12 @@
             {
                 question: "Qual hábito de vida ajuda na prevenção do câncer de mama?",
                 options: [
-                    "Prática regular de atividade física",
                     "Consumo excessivo de álcool",
                     "Tabagismo",
-                    "Sedentarismo"
+                    "Sedentarismo",
+                    "Prática regular de atividade física",
                 ],
-                correct: 0
+                correct: 3
             }
         ];
 
@@ -985,7 +985,7 @@
                 resultMessage.textContent = "Continue aprendendo! A conscientização é o primeiro passo para a prevenção.";
             }
             
-            // Mostrar mensagem de prêmio se necessário
+            // Mostrar mensagem de brinde se necessário
             if (finalScore >= 5) {
                 prizeMessage.style.display = 'block';
             }
